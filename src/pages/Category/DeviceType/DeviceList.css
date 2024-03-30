@@ -1,0 +1,49 @@
+#Device-List{
+    width: 100%;
+   text-align: left;
+}
+
+#Device-List .Device-Item {
+    display: inline-block;
+    width: 200px;
+    height: 314px;
+    flex-shrink: 0;
+
+    margin: 26px 2% 26px 0;
+    padding: 1%;
+
+
+    border-radius: 10px;
+    border: 1px solid #AFAFAF;
+    background: #FFF;
+
+    /* base */
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.10);
+
+    box-sizing: border-box;
+}
+
+#Device-List .Device-Item img {
+    width: 100%;
+    height: 60%;
+}
+
+#Device-List .Device-Item .device-name {
+    color: #000;
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#Device-List .Device-Item .device-price {
+    color: #009252;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

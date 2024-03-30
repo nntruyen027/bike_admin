@@ -1,0 +1,93 @@
+#Login .logo512 {
+    display: block;
+    margin: 0 auto;
+    width: 22%;
+}
+
+#Login label {
+    display: block;
+    text-align: left;
+}
+
+#Login input {
+    display: block;
+}
+
+#Login form {
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+}
+
+#Login form label {
+    color: #0A5D00;
+    font-size: 24px;
+    font-family: "Source Sans Pro";
+    font-weight: 400;
+    word-wrap: break-word
+}
+
+#Login input[type=text], #Login input[type=password] {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 24px;
+    border-bottom: 1px solid #000000;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin: 0 auto 35px;
+    background-repeat: no-repeat;
+    background-position: 96% 0;
+    outline: none;
+}
+
+#Login input:focus {
+    border-bottom: 1px solid #231f1f;
+}
+
+#username {
+    background-image: url('../../public/assets/images/login/fa6-solid_user.png');
+}
+
+#password {
+    background-image: url('../../public/assets/images/login/fa-solid_lock.png');
+}
+
+#submit {
+    background-color: #ffffff;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    color: #009252;
+    font-size: 32px;
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+    word-wrap: break-word;
+    border-bottom: 1px #009252 solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin: 0 auto;
+}
+
+#submit:hover {
+    cursor: pointer;
+    border: 1px #009252 solid;
+}
+
+.the-boy {
+    width: 25%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.the-girl {
+    width: 25%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+

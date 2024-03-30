@@ -1,0 +1,51 @@
+#Point-List {
+    width: 100%;
+    text-align: left;
+
+    margin-top: 16px;
+
+    border-collapse: separate; /* Đảm bảo rằng các đường biên sẽ không được hợp nhất */
+    border-spacing: 10px; /* Khoảng cách giữa các dòng là 10px */
+}
+
+#Point-List .Point-Item, #Point-List tr {
+    height: 40px;
+
+    color: #000;
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+#Point-List .Point-Item, #Point-List tr:after {
+    content: "";
+    width: 100%;
+    height: 10px;
+}
+
+#Point-List thead tr {
+    height: 40px;
+    margin-bottom: 15px;
+    color:  #0A5D00;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+#Point-List .point-name, #Point-List thead .point-name{
+    width: 30%;
+}
+
+#Point-List .point-address, #Point-List thead .point-address {
+    width: 44%;
+}
+
+button {
+    float: left;
+    margin: 10px 0;
+}
+

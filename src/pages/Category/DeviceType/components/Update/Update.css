@@ -1,0 +1,47 @@
+.add-car-type-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    padding-right: 10px;
+}
+
+.image-input {
+    margin-top: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+
+.image-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.image-input input[type="file"] {
+    display: none;
+}
+
+.image-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.info-input {
+    flex: 1;
+}
+
+.info-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.info-input input[type="text"],
+.info-input textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

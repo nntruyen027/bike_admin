@@ -1,0 +1,23 @@
+#UpdateButton {
+    width: 100px;
+    height: 40px;
+    flex-shrink: 0;
+
+    border-radius:  50px;
+    background: #daffcc;
+    border: none;
+
+    color: #109807;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#UpdateButton:hover {
+    cursor: pointer;
+
+    color: #FFFFFF;
+    background-color: #109807;
+}

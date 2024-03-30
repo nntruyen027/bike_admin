@@ -1,0 +1,94 @@
+#Event {
+    position: absolute;
+    left: 15%;
+    width: 80%;
+
+    text-align: left;
+}
+
+#Event-Body {
+    margin-top: 26px;
+}
+
+#Event .Event-Item {
+    display: inline-block;
+
+    width: 320px;
+    /*height: 248px;*/
+    flex-shrink: 0;
+
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    margin: 20px 30px 20px 0;
+
+    text-align: left;
+
+    padding-bottom: 20px;
+
+    border-radius: 10px;
+
+    background-color: #FFFFFF;
+}
+
+#Event .Event-Item img {
+    width: 100%;
+    height: 200px;
+}
+
+#Event .event-name {
+    color: #000;
+    font-family: 'Inter', serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    margin-left: 20px;
+}
+
+#Event .event-state {
+    float: right;
+    margin-right: 10px;
+
+    font-family: 'Inter', serif;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+
+    border-radius: 50px;
+    text-align: center;
+
+    width: 20%;
+    flex-shrink: 0;
+}
+
+#Event .event-state.upcoming {
+    color: #F90;
+    background: #FFFFBE;
+}
+
+#Event .event-state.ongoing {
+
+    color: #009252;
+    background: #BFFFBE;
+}
+
+#Event .event-state.finished {
+    color: #FF0000;
+    background: #FFC6C6;
+}
+
+#Event .event-times {
+    margin-top: 20px;
+    overflow: hidden;
+    color: #000;
+    text-overflow: ellipsis;
+    font-family: 'Inter', serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+
+    margin-left: 20px;
+}
+
