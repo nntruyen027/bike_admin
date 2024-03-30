@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './UpdateButton.css';
+import './SaveButton.css';
 
-function UpdateButton({ onClick, }) {
-  return <button id={'UpdateButton'} onClick={onClick}>Chỉnh sửa</button>;
+function SaveButton({ onClick, }) {
+  return <button id={'SaveButton'} onClick={onClick}>Lưu</button>;
 }
 
-UpdateButton.propTypes = {
+SaveButton.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default UpdateButton;
+export default SaveButton;

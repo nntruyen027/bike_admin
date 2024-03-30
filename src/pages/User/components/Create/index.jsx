@@ -1,69 +1,84 @@
 import './AddStaff.css';
-import React from 'react';
+import React, { useState, } from 'react';
 import PropTypes from 'prop-types';
-import { CreateButton, ExitButton, } from '~/components';
+import { SaveButton, } from '~/components';
 
-export default function AddStaff({ setAddUser, }) {
-
-  function handleClick() {
-    setAddUser(false);
-  }
+export default function AddStaff({ onCreate, }) {
+  const [username, setUsername,] = useState('');
+  const [email, setEmail,] = useState( '');
+  const [phone, setPhone,] = useState('');
+  const [fullname, setFullname,] = useState('');
+  const [gender, setGender,] = useState('Nam');
 
   return (
     <div id={'Add-Staff'}>
-      <div className={'image-container'}>
-        <input type='file' id='image-input' accept='image/*' style={{
-          display: 'none',
-        }}/>
-        <label htmlFor='image-input'>
-          <img src={process.env.PUBLIC_URL + 'assets/images/category/image-input.png'}
-            alt='Your Image'/>
-        </label>
-      </div>
-
       <div className={'body-container'}>
         <table>
           <tr>
             <td>
               <div>Họ tên</div>
-              <input type={'text'}/>
+              <input
+                type={'text'}
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+              />
             </td>
             <td>
-              <div>Ngày sinh</div>
-              <input type={'date'}/>
+              <div>Tên tài khoản</div>
+              <input
+                type={'text'}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </td>
           </tr>
           <tr>
             <td>
               <div>Giới tính</div>
-              <input type={'text'}/>
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option key={'Nam'} label={'Nam'} value={'Nam'} />
+                <option key={'Nữ'} label={'Nữ'} value={'Nữ'} />
+              </select>
             </td>
             <td>
               <div>Số điện thoại</div>
-              <input type={'text'}/>
+              <input
+                type={'text'}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </td>
           </tr>
           <tr>
             <td colSpan={2}>
-              <div>Địa chỉ</div>
-              <input type={'text'} style={{
-                width: '90%',
-              }}/>
+              <div>Email</div>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type={'text'}
+                style={{
+                  width: '90%',
+                }}
+              />
             </td>
           </tr>
         </table>
 
         <div className={'button-container'}>
-          <ExitButton onClick={handleClick}/>
-          <CreateButton onClick={handleClick} />
+          <SaveButton onClick={() => {
+            onCreate({
+              username, fullname, email, phone, gender,
+            });
+          }}/>
         </div>
-
       </div>
     </div>
-
   );
 }
 
 AddStaff.propTypes = {
-  setAddUser: PropTypes.func,
+  onCreate: PropTypes.func,
 };

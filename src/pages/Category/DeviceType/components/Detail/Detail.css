@@ -1,0 +1,42 @@
+/* Modal */
+.modal-content-inner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+    padding: 20px;
+    width: 50%;
+    word-wrap: break-word;
+}
+
+.left-section {
+    background-color: #f0f0f0;
+}
+
+.right-section {
+    background-color: #ffffff;
+}
+
+.modal-content-inner img {
+    width: 100%;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .modal-content-inner {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+    }
+}

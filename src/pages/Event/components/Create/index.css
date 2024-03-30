@@ -1,0 +1,61 @@
+#create-form {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    font-size: 24px;
+}
+
+#create-form .info-input {
+    width: 50%;
+    flex: 1; /* 50% width */
+    padding-left: 20px; /* tạo khoảng cách giữa phần ảnh và các phần nhập */
+}
+
+#create-form .info-input input {
+    font-size: 24px;
+    width: 90%;
+}
+
+#create-form .image-input {
+    flex: 1;
+    width: 50%;
+}
+
+#create-form .image-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#create-form .image-input input[type="file"] {
+    display: none;
+}
+
+#create-form .image-preview {
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#create-form input[type='datetime-local'] {
+    outline: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 20px;
+}
+
+#create-form textarea {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+#create-form textarea:focus{
+    outline: none;
+    border-color: #007bff;
+}

@@ -1,4 +1,4 @@
-#DeleteButton {
+#UpdateButton {
     width: 100px;
     height: 40px;
     flex-shrink: 0;
@@ -7,17 +7,19 @@
     background: #daffcc;
     border: none;
 
-    color: #81e507;
+    color: #109807;
     font-family: 'Inter', serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
+    margin-right: 10px;
 }
 
-#DeleteButton:hover {
+#UpdateButton:hover {
     cursor: pointer;
 
     color: #FFFFFF;
-    background-color: #81e507;
+    background-color: #109807;
 }

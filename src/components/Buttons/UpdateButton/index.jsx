@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './DeleteButton.css';
+import './UpdateButton.css';
 
-function DeleteButton({ onClick, }) {
-  return <button id={'DeleteButton'} onClick={onClick}>Xóa</button>;
+function UpdateButton({ onClick, }) {
+  return <button id={'UpdateButton'} onClick={onClick}>Chỉnh sửa</button>;
 }
 
-DeleteButton.propTypes = {
+UpdateButton.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default DeleteButton;
+export default UpdateButton;

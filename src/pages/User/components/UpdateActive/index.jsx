@@ -1,76 +1,53 @@
-import './AddStaff.css';
-import React, { useState, } from 'react';
+import './UpdateActive.css';
+import React, { useEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
 import { SaveButton, } from '~/components';
 
-export default function AddStaff({ onCreate, }) {
-  const [username, setUsername,] = useState('');
-  const [email, setEmail,] = useState( '');
-  const [phone, setPhone,] = useState('');
-  const [fullname, setFullname,] = useState('');
-  const [gender, setGender,] = useState('Nam');
+export default function UpdateActive({ username, onUpdate, }) {
+  const [banned, setBanned,] = useState(false);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/user/?username=${username}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
+      },
+      method: 'GET',
+    })
+      .then(res => {
+        if(res.status === 200)
+          return res.json();
+        else
+          return Promise.reject(res.json());
+      })
+      .then(data => {
+        setBanned(data.data.is_banned);
+      })
+      .catch(error => alert(error));
+  }, []);
 
   return (
-    <div id={'Add-Staff'}>
+    <div id={'Update-Active'}>
       <div className={'body-container'}>
         <table>
           <tr>
             <td>
-              <div>Họ tên</div>
-              <input
-                type={'text'}
-                value={fullname}
-                onChange={(e) => setFullname(e.target.value)}
-              />
-            </td>
-            <td>
-              <div>Tên tài khoản</div>
-              <input
-                type={'text'}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div>Giới tính</div>
+              <div>Trạng thái hoạt động</div>
               <select
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                value={banned}
+                onChange={(e) => setBanned(e.target.value)}
               >
-                <option key={'Nam'} label={'Nam'} value={'Nam'} />
-                <option key={'Nữ'} label={'Nữ'} value={'Nữ'} />
+                <option key={'false'} label={'Bình thường'} value={false} />
+                <option key={'true'} label={'Cấm'} value={true} />
               </select>
-            </td>
-            <td>
-              <div>Số điện thoại</div>
-              <input
-                type={'text'}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2}>
-              <div>Email</div>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type={'text'}
-                style={{
-                  width: '90%',
-                }}
-              />
             </td>
           </tr>
         </table>
 
         <div className={'button-container'}>
           <SaveButton onClick={() => {
-            onCreate({
-              username, fullname, email, phone, gender,
+            onUpdate({
+              id:username, is_banned:banned,
             });
           }}/>
         </div>
@@ -79,6 +56,7 @@ export default function AddStaff({ onCreate, }) {
   );
 }
 
-AddStaff.propTypes = {
-  onCreate: PropTypes.func,
+UpdateActive.propTypes = {
+  onUpdate: PropTypes.func,
+  username: PropTypes.string,
 };

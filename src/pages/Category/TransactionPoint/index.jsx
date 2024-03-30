@@ -1,66 +1,176 @@
-import './TransactionPointList.css';
-import React, { useLayoutEffect, useState, } from 'react';
-import PropTypes from 'prop-types';
+import './TransactionPoint.css';
+import React, { useEffect, useState, } from 'react';
+import Table from '~/components/Table';
+import { DeleteButton, UpdateButton, } from '~/components';
+import Modal from '~/components/Modal';
+import { Create, Update, Filter, } from './components';
 
-export default function TransactionPointList({ setEdit, }) {
+export default function TransactionPoint() {
   const [transactions, setTransactions, ] = useState([]);
+  const [showCreate, setShowCreate,] = useState(false);
+  const [showUpdate, setShowUpdate,] = useState(false);
+  const [selectedId, setSelectedId,] = useState(null);
+  const [filterData, setFilterData,] = useState([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     handleGetList();
   }, []);
   
   const handleGetList = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/transactions/`, {
-      methods: 'GET',
+      method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access'),
         'Accept': 'application/json',
       },
     })
       .then(res => res.json())
-      .then(data => setTransactions(data.data))
+      .then(data => {
+        setTransactions(data.data);
+        setFilterData(data.data);
+      })
       .catch(err => alert(err));
   };
 
-  return (
-    <table id={'Point-List'} >
-      <thead>
-        <tr>
-          <td className={'point-name'}>Điểm giao dịch</td>
-          <td className={'point-address'}>Địa chỉ</td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        {transactions.map((point, index) => <PointItem key={index} point={point} setEdit={setEdit}/>)}
-      </tbody>
+  const handleCreate = ({ name, address, }) => {
+    const form = new FormData();
+    form.append('name', name);
+    form.append('address', address);
 
-    </table>
-  );
-}
+    console.log(name, address);
 
-function PointItem({ point, setEdit, }) {
-  const handleClick = () => {
-    setEdit(true);
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/`, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+      body: form,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          alert('Tạo địa điểm thành công');
+          handleGetList();
+        } else {
+          alert(res.json()?.error);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  const handleUpdate = ({ id, name, address, }) => {
+    const form = new FormData();
+    form.append('name', name);
+    form.append('address', address);
+
+    console.log(name, address);
+
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/${id}/`, {
+      method: 'PUT',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+      body: form,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          alert('Sửa địa điểm thành công');
+          handleGetList();
+        } else {
+          alert(res.json()?.error);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  const handleDetele = ({ id, }) => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/${id}/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 204) {
+          handleGetList();
+          alert('Xóa địa địa điểm thành công');
+        } else {
+          alert(res.json()?.error);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  const setShowCreateLocation = () => {
+    setShowCreate(!showCreate);
+  };
+
+  const setShowUpdateLocation = (id) => {
+    setShowUpdate(!showUpdate);
+    if(showUpdate)
+      setSelectedId(id);
+    else
+      setSelectedId(null);
+  };
+
+  // eslint-disable-next-line react/prop-types
+  const ButtonGroup = ({ data, }) => {
+    return (
+      <>
+        <DeleteButton onClick={() => handleDetele({
+          id: data,
+        })}/>
+        <UpdateButton onClick={() => setShowUpdateLocation(data)}/>
+        {selectedId === data && <Modal title={'Chỉnh sửa địa điểm'} setShow={setShowUpdateLocation}>
+          <Update id={data} onUpdate={handleUpdate}/>
+        </Modal> }
+      </>
+    );
   };
 
   return (
-    <tr id={point.id} className={'Point-Item'}>
-      <td className={'point-name'}>{point.name}</td>
-      <td className={'point-address'}>{point.address}</td>
-      <td className={'button-group'}>
-        <button className={'edit-button'} onClick={handleClick}>Chỉnh sửa</button>
-        <button className={'delete-button'}>Xóa</button>
-      </td>
-    </tr>
+    <>
+      <Filter data={filterData} setData={setFilterData} originData={transactions} showCreateModal={() => setShowCreate(!showCreate)}/>
+      <Table
+        data={filterData}
+        columns={[
+          {
+            label: 'ID',
+            key: 'id',
+          },
+          {
+            label: 'Điểm giao dịch',
+            key: 'name',
+          },
+          {
+            label: 'Địa chỉ',
+            key: 'address',
+          },
+          {
+            label: '',
+            component: ButtonGroup,
+            type: 'component',
+            key: 'id',
+          },
+        ]}
+      />
+      {showCreate && (
+        <Modal
+          setShow={setShowCreateLocation}
+          title={'Thêm địa điểm giao dịch'}
+        >
+          <Create onCreate={handleCreate} />
+        </Modal>
+      )}
+    </>
   );
 }
 
-TransactionPointList.propTypes = {
-  setEdit: PropTypes.func,
-};
-
-PointItem.propTypes = {
-  setEdit: PropTypes.func,
-  point: PropTypes.object,
-};

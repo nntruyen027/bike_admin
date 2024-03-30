@@ -1,30 +1,20 @@
-import './index.css'
-import Header from "./Header";
-import {useState} from "react";
+import './index.css';
+import React, { useState, } from 'react';
+import Header from './components/Header';
+import Comment from './Comment';
 
 export default function Feedback() {
-    const [show, setShow] = useState(false)
+  const [currentTab, setCurrentTab,] = useState('Đánh giá');
 
-    const handleClick = (e) => {
-        if(show)
-            setShow(false)
-        else
-            setShow(true)
+  const render = () => {
+    if(currentTab === 'Đánh giá')
+      return <Comment/>;
+  };
 
-        console.log(show)
-    }
-
-    function changValueButton() {
-        if(show) {
-            return <button onClick={handleClick}>Nhất để ẩn</button>
-        } else {
-            return <button onClick={handleClick}>Nhất để hiện</button>
-        }
-    }
-
-    return (
-        <div id={'Feedback'} >
-            {changValueButton()}
-        </div>
-    )
+  return (
+    <div id={'Feedback'} >
+      <Header currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+      {render()}
+    </div>
+  );
 }

@@ -2,28 +2,8 @@
     margin-top: 26px;
 }
 
-#Add-Staff .image-container {
-    float: left;
-    width: 30%;
-
-    padding: 0.1%;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 10px;
-
-    background: #FFF;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
-
-}
-
-#Add-Staff .image-container img {
-    width: 100%;
-}
-
 #Add-Staff .body-container {
-    float: right;
-    width: 55%;
+    width: 100%;
 }
 
 #Add-Staff .body-container table {
@@ -37,7 +17,7 @@
 }
 
 
-#Add-Staff .body-container input {
+#Add-Staff .body-container input,  #Add-Staff .body-container select{
     font-family: 'Inter', serif;
 
     display: flex;
@@ -54,32 +34,13 @@
     margin-bottom: 20px;
 }
 
+#Add-Staff .body-container select {
+    width: 94%;
+}
+
 #Add-Staff .body-container .button-container {
     float: left;
     width: 100%;
     text-align: left;
 }
-
-#Add-Staff .body-container button {
-    width: 14%;
-    height: 33.814px;
-    flex-shrink: 0;
-
-    border-radius: 50px;
-    border: 1px solid #006B3C;
-    background: #FFF;
-
-    margin-left: 10px;
-}
-
-#Add-Staff .body-container button#button-save {
-    background-color:#006B3C ;
-    color: #FFF ;
-}
-
-#Add-Staff .body-container button:hover {
-    cursor: pointer;
-}
-
-
 

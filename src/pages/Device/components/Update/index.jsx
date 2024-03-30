@@ -1,11 +1,11 @@
 import React, { useEffect, useState, } from 'react';
-import './AddDevice.css';
+import './UpdateDevice.css';
 import { SaveButton, } from '~/components';
 import PropTypes from 'prop-types';
 
 const status = ['Sẵn sàng sử dụng', 'Đang sữa chữa', 'Đang sử dụng', 'Ngưng sử dụng',];
 
-export default function Create({ onCreate, }) {
+export default function Update({ id, onUpdate, }) {
   const [bikeTypes, setBikeTypes,] = useState([]);
   const [locations, setLocations,] = useState([]);
   const [selectedType, setSelectedType,] = useState('');
@@ -50,13 +50,14 @@ export default function Create({ onCreate, }) {
   };
 
   const createDevice = () => {
-    onCreate({
-      selectedLocation, selectedType, selectedStatus, 
-    });
+    onUpdate(
+      {
+        id, selectedLocation, selectedType, selectedStatus,
+      });
   };
 
   return (
-    <div id={'Add-Bicycle'}>
+    <div id={'Update-Bicycle'}>
       <div className={'body-container'}>
         <table>
           <tr>
@@ -115,6 +116,7 @@ export default function Create({ onCreate, }) {
   );
 }
 
-Create.propTypes ={
-  onCreate: PropTypes.func,
+Update.propTypes ={
+  id: PropTypes.string,
+  onUpdate: PropTypes.func,
 };

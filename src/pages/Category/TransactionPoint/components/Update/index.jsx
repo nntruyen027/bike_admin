@@ -1,18 +1,37 @@
 import './Create.css';
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
 import { SaveButton, } from '~/components';
 
-export default function Create({ onCreate, }) {
+export default function Update({ onUpdate, id, }) {
   const [name, setName,] = useState('');
   const [address, setAddress,] = useState('');
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/${id}/`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setName(data.data.name);
+        setAddress(data.data.address);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
 
   const handleSubmit = () => {
     if (!name || !address) {
       alert('Vui lòng điền đầy đủ thông tin.');
       return;
     }
-    onCreate({
+    onUpdate({
+      id,
       name,
       address,
     });
@@ -38,6 +57,7 @@ export default function Create({ onCreate, }) {
   );
 }
 
-Create.propTypes = {
-  onCreate: PropTypes.func,
+Update.propTypes = {
+  onUpdate: PropTypes.func,
+  id: PropTypes.string,
 };

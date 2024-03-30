@@ -1,3 +1,4 @@
+const { join, } = require('path');
 module.exports = {
   env: {
     browser: true,
@@ -94,5 +95,20 @@ module.exports = {
         max: 1,
       },
     ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: [
+          'src',
+        ],
+      },
+      alias: {
+        map: [
+          ['~', join(__dirname, 'src'),],
+        ],
+        extensions: ['.js', '.jsx',],
+      },
+    },
   },
 };

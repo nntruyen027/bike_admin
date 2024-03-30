@@ -1,0 +1,25 @@
+#CreateButton {
+    width: 9%;
+    height: 40px;
+    flex-shrink: 0;
+
+    border-radius:  50px;
+    background:  #CCFFE9;
+    border: none;
+
+    color: #063B00;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    margin-right: 10px;
+}
+
+#CreateButton:hover {
+    cursor: pointer;
+
+    color: #FFFFFF;
+    background-color: #009252;
+}

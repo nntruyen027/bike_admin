@@ -1,11 +1,11 @@
 import React, { useEffect, useState, } from 'react';
 import './AddDevice.css';
+import { SaveButton, } from '~/components';
 import PropTypes from 'prop-types';
-import { CreateButton, ExitButton, } from '~/components';
 
 const status = ['Sẵn sàng sử dụng', 'Đang sữa chữa', 'Đang sử dụng', 'Ngưng sử dụng',];
 
-export default function AddDevice({ setAddDevice, }) {
+export default function Create({ onCreate, }) {
   const [bikeTypes, setBikeTypes,] = useState([]);
   const [locations, setLocations,] = useState([]);
   const [selectedType, setSelectedType,] = useState('');
@@ -50,30 +50,10 @@ export default function AddDevice({ setAddDevice, }) {
   };
 
   const createDevice = () => {
-    const form = new FormData();
-    form.append('location', selectedLocation);
-    form.append('type', selectedType);
-    form.append('status', selectedStatus);
-
-    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access'),
-        Accept: 'application/json',
-      },
-      body: form,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data);
-        setAddDevice(false);
-      })
-      .catch((err) => console.log(err));
+    onCreate({
+      selectedLocation, selectedType, selectedStatus, 
+    });
   };
-
-  function handleClick() {
-    setAddDevice(false);
-  }
 
   return (
     <div id={'Add-Bicycle'}>
@@ -82,8 +62,10 @@ export default function AddDevice({ setAddDevice, }) {
           <tr>
             <td>
               <div>Loại xe</div>
-              <select value={selectedType} 
-                onChange={(e) => setSelectedType(e.target.value)}>
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+              >
                 {bikeTypes.map((bikeType) => (
                   <option key={bikeType?.id} value={bikeType?.id}>
                     {bikeType?.name}
@@ -91,10 +73,14 @@ export default function AddDevice({ setAddDevice, }) {
                 ))}
               </select>
             </td>
+          </tr>
+          <tr>
             <td>
               <div>Điểm giao dịch</div>
-              <select value={selectedLocation}
-                onChange={e => setSelectedLocation(e.target.value)}>
+              <select
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
+              >
                 {locations.map((location) => (
                   <option key={location?.id} value={location?.id}>
                     {location?.name}
@@ -106,8 +92,10 @@ export default function AddDevice({ setAddDevice, }) {
           <tr>
             <td>
               <div>Trạng thái sử dụng</div>
-              <select value={selectedStatus}
-                onChange={e => setSelectedStatus(e.target.value)}>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
                 {status.map((status) => (
                   <option key={status} value={status}>
                     {status}
@@ -120,14 +108,13 @@ export default function AddDevice({ setAddDevice, }) {
         </table>
 
         <div className={'button-container'}>
-          <ExitButton onClick={handleClick}/>
-          <CreateButton onClick={createDevice}/>
+          <SaveButton onClick={createDevice} />
         </div>
       </div>
     </div>
   );
 }
 
-AddDevice.propTypes = {
-  setAddDevice: PropTypes.func,
+Create.propTypes ={
+  onCreate: PropTypes.func,
 };

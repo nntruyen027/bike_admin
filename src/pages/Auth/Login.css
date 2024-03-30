@@ -46,11 +46,11 @@
 }
 
 #username {
-    background-image: url('../../public/assets/images/login/fa6-solid_user.png');
+    background-image: url('../../../public/assets/images/login/fa6-solid_user.png');
 }
 
 #password {
-    background-image: url('../../public/assets/images/login/fa-solid_lock.png');
+    background-image: url('../../../public/assets/images/login/fa-solid_lock.png');
 }
 
 #submit {

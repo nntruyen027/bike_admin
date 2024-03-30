@@ -1,23 +1,23 @@
-#Add-Staff {
+#Update-Active {
     margin-top: 26px;
 }
 
-#Add-Staff .body-container {
+#Update-Active .body-container {
     width: 100%;
 }
 
-#Add-Staff .body-container table {
+#Update-Active .body-container table {
     width: 100%;
 }
 
 
-#Add-Staff .body-container table div {
+#Update-Active .body-container table div {
     text-align: left;
     margin-bottom: 10px;
 }
 
 
-#Add-Staff .body-container input,  #Add-Staff .body-container select{
+#Update-Active .body-container input,  #Update-Active .body-container select{
     font-family: 'Inter', serif;
 
     display: flex;
@@ -34,11 +34,11 @@
     margin-bottom: 20px;
 }
 
-#Add-Staff .body-container select {
+#Update-Active .body-container select {
     width: 94%;
 }
 
-#Add-Staff .body-container .button-container {
+#Update-Active .body-container .button-container {
     float: left;
     width: 100%;
     text-align: left;

@@ -1,0 +1,35 @@
+#event-detail.modal-content {
+    display: flex;
+    padding: 20px;
+}
+
+#event-detail.modal-content .event-image {
+    flex: 1;
+    width: 50%;
+}
+
+#event-detail.modal-content .event-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#event-detail.modal-content .event-info {
+    flex: 1;
+    padding-left: 20px;
+    width: 50%;
+}
+
+#event-detail.modal-content .event-info div {
+    margin-bottom: 10px;
+}
+
+#event-detail.modal-content .event-info strong {
+    font-weight: bold;
+    color: #333;
+}
+
+#event-detail.modal-content .event-info div:last-child {
+    margin-bottom: 0;
+}

@@ -5,30 +5,15 @@
 }
 
 #Device table {
-    width: 100%;
-    text-align: left;
-
+    margin-top: 10px;
     font-family: 'Inter', serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
-    border-collapse: separate;
-    border-spacing: 0 25px;
-
 }
 
 #Device .text-align-center {
     text-align: center!important;
-}
-
-
-#Device table thead {
-    color: #0A5D00;
-}
-
-#Device table th {
-    border-bottom: 2px solid #D3D3D3;
 }
 
 

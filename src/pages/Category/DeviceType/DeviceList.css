@@ -1,9 +1,9 @@
-#Device-List{
+#Device-Type{
     width: 100%;
    text-align: left;
 }
 
-#Device-List .Device-Item {
+#Device-Type .Device-Item {
     display: inline-block;
     width: 200px;
     height: 314px;
@@ -23,12 +23,12 @@
     box-sizing: border-box;
 }
 
-#Device-List .Device-Item img {
+#Device-Type .Device-Item img {
     width: 100%;
     height: 60%;
 }
 
-#Device-List .Device-Item .device-name {
+#Device-Type .Device-Item .device-name {
     color: #000;
     font-family: 'Inter', serif;
     font-size: 14px;
@@ -39,7 +39,7 @@
     margin-bottom: 40px;
 }
 
-#Device-List .Device-Item .device-price {
+#Device-Type .Device-Item .device-price {
     color: #009252;
     font-family: 'Inter', serif;
     font-size: 16px;

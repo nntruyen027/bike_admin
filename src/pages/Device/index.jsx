@@ -1,74 +1,137 @@
 import './index.css';
-import Filter from './components/Filter';
-import AddDevice from './components/AddDevice';
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
+import QRCode from 'qrcode.react';
+import Table from '~/components/Table';
+import { DeleteButton, Modal, UpdateButton, } from '~/components';
+import { Create, Filter, Update, } from './components';
 
 export default function Device() {
   const [addDevice, setAddDevice,] = useState(false);
-  const [bicycleList, ,] = useState([]);
+  const [updateDevice, setUpdateDevice,] = useState(false);
+  const [bicycleList, setBicycleList,] = useState([]);
+  const [selectedId, setSelectedId,] = useState(null);
+  const [filterData, setFilterData,] = useState([]);
+
+  useEffect(() => {
+    handleGetDevices();
+  }, []);
+
+  const handleGetDevices = () => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setBicycleList(data.data);
+        setFilterData(data.data);
+      })
+      .catch((error) => alert(error));
+  };
+
+  const handleDeleteDevice = (id) => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/${id}/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+    })
+      .then(()=> handleGetDevices())
+      .catch(error => alert(error));
+  };
+
+  const handleCreate = ({ selectedLocation, selectedType, selectedStatus, }) => {
+    const form = new FormData();
+    form.append('location', selectedLocation);
+    form.append('type', selectedType);
+    form.append('status', selectedStatus);
+
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/`, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+      body: form,
+    })
+      .then(() => handleGetDevices())
+      .catch((err) => console.log(err));
+  };
+
+  const handleUpdate = ({ id, selectedLocation, selectedType, selectedStatus, }) => {
+    const form = new FormData();
+    form.append('location', selectedLocation);
+    form.append('type', selectedType);
+    form.append('status', selectedStatus);
+
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/${id}/`, {
+      method: 'PUT',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('access'),
+        Accept: 'application/json',
+      },
+      body: form,
+    })
+      .then(() => handleGetDevices())
+      .catch((err) => console.log(err));
+  };
+
+  const setShowUpdateLocation = (id) => {
+    setUpdateDevice(!updateDevice);
+    if(updateDevice)
+      setSelectedId(id);
+    else
+      setSelectedId(null);
+  };
+
+  // eslint-disable-next-line react/prop-types
+  const ButtonGroup = ({ data, }) => {
+    return (
+      <>
+        <DeleteButton onClick={() => handleDeleteDevice(data)}/>
+        <UpdateButton onClick={() => setShowUpdateLocation(data)}/>
+        {selectedId === data && <Modal title={'Chỉnh sửa địa điểm'} setShow={setShowUpdateLocation}>
+          <Update id={data} onUpdate={handleUpdate}/>
+        </Modal> }
+      </>
+    );
+  };
 
   function renderBody() {
-    if(!addDevice) {
-      return (<table>
-        <thead>
-          <tr>
-            <th>
-                        ID
-            </th>
-            <th>
-                        Loại xe đạp
-            </th>
-            <th className={'text-align-center'}>
-                        Số lần sử dụng
-            </th>
-            <th className={'text-align-center'}>
-                        Điểm giao dịch
-            </th>
-            <th className={'text-align-center'}>
-                        Trạng thái sử dụng
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {bicycleList.map((device, index) => <DeviceItem key={index} device={device}/> )}
-        </tbody>
-      </table>);
-    } else {
-      return <AddDevice setAddDevice={setAddDevice}/>;
-    }
+    return <Table columns={[{
+      key:'id', label: 'QR code', type: 'component', component: QRComponent,
+    }, {
+      key:'type', label: 'Loại xe',
+    }, {
+      key: 'location', label:'Địa điểm hiện tại',
+    }, {
+      key:'status', label: 'Trạng thái',
+    }, {
+      key: 'id', component: ButtonGroup, label: '', type: 'component',
+    },
+
+    ]} data={filterData} />;
   }
 
   return (
     <div id={'Device'}>
-      <Filter setAddDevice={setAddDevice}/>
+      <Filter filterData={filterData} setFilterData={setFilterData} originData={bicycleList} onShowCreate={() => { setAddDevice(!addDevice); }}/>
+      {addDevice && <Modal title={'Thêm xe đạp'} setShow={() => { setAddDevice(!addDevice); }}>
+        <Create onCreate={handleCreate} />
+      </Modal>}
       {renderBody()}
     </div>
   );
 }
 
-function DeviceItem({ device, }) {
-  return (
-    <tr>
-      <td>
-        {device.uuid}
-      </td>
-      <td>
-        {device.type}
-      </td>
-      <td className={'text-align-center'}>
-        {device.used}
-      </td>
-      <td>
-        {device.transaction}
-      </td>
-      <td className={'text-align-center'}>
-        {device.status}
-      </td>
-    </tr>
-  );
+function QRComponent ({ data, }) {
+  return <QRCode value={data} />;
 }
 
-DeviceItem.propTypes = {
-  device : PropTypes.object,
+QRComponent.propTypes = {
+  data: PropTypes.any,
 };

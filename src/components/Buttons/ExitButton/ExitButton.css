@@ -1,23 +1,25 @@
-#UpdateButton {
+#ExitButton {
     width: 100px;
     height: 40px;
     flex-shrink: 0;
 
     border-radius:  50px;
-    background: #daffcc;
+    background: #f8f8f8;
     border: none;
 
-    color: #109807;
+    color: #838383;
     font-family: 'Inter', serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-right: 10px;
+
 }
 
-#UpdateButton:hover {
+#ExitButton:hover {
     cursor: pointer;
 
     color: #FFFFFF;
-    background-color: #109807;
+    background-color: #ababab;
 }

@@ -1,0 +1,50 @@
+#add-car-type-form {
+    width: 100%;
+    display: flex;
+    padding-right: 10px;
+}
+
+#add-car-type-form .image-input {
+    flex: 1;
+    width: 50%;
+}
+
+#add-car-type-form .image-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#add-car-type-form .image-input input[type="file"] {
+    display: none;
+}
+
+#add-car-type-form .image-preview {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#add-car-type-form .image-preview img {
+    width: 100%;
+    height: auto;
+}
+
+#add-car-type-form .info-input {
+    width: 50%;
+    flex: 1;
+}
+
+#add-car-type-form .info-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#add-car-type-form .info-input input[type="text"],
+#add-car-type-form .info-input textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

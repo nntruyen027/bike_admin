@@ -1,25 +1,25 @@
-#Add-Bicycle {
+#Update-Bicycle {
     margin-top: 26px;
     text-align: center;
 }
 
 
-#Add-Bicycle .body-container {
+#Update-Bicycle .body-container {
     margin: 0 auto;
 }
 
-#Add-Bicycle .body-container table {
+#Update-Bicycle .body-container table {
     width: 100%;
 }
 
 
-#Add-Bicycle .body-container table div {
+#Update-Bicycle .body-container table div {
     text-align: left;
     margin-bottom: 10px;
 }
 
 
-#Add-Bicycle .body-container input, #Add-Bicycle .body-container select, #Add-Bicycle .body-container option{
+#Update-Bicycle .body-container input, #Update-Bicycle .body-container select, #Update-Bicycle .body-container option{
     font-family: 'Inter', serif;
     padding: 12px 16px;
 
@@ -30,7 +30,7 @@
     margin-bottom: 20px;
 }
 
-#Add-Bicycle .body-container select{
+#Update-Bicycle .body-container select{
     width: 90%;
 }
 

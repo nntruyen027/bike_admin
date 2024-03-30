@@ -1,14 +1,21 @@
-import React, { useState, } from 'react';
-import './Create.css';
+import React, { useState, useEffect, } from 'react';
+import './Update.css';
 import PropTypes from 'prop-types';
 import { SaveButton, } from '~/components';
 
-function Create({ onCreate, }) {
+function Update({ onUpdate, type, }) {
   const defaultImage = process.env.PUBLIC_URL + 'assets/images/category/image-input.png';
-  const [image, setImage,] = useState(null);
-  const [name, setName,] = useState('');
-  const [price, setPrice,] = useState('');
-  const [description, setDescription,] = useState('');
+  const [image, setImage,] = useState( );
+  const [name, setName,] = useState(type?.name || '');
+  const [price, setPrice,] = useState(type?.price || '');
+  const [description, setDescription,] = useState(type?.description || '');
+
+  useEffect(() => {
+    setImage( null);
+    setName(type.name || '');
+    setPrice(type.price || '');
+    setDescription(type.description || '');
+  }, [type,]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,18 +34,12 @@ function Create({ onCreate, }) {
       return;
     }
 
-    onCreate({
-      price, name, description, image,
-    });
-
-    setName('');
-    setDescription('');
-    setImage(null);
-    setPrice('');
+    onUpdate(type.id, name, price, description, type.image, image);
   };
+  console.log(image);
 
   return (
-    <form className='add-car-type-form' onSubmit={handleSubmit} encType='multipart/form-data'>
+    <form id='update-car-type-form' onSubmit={handleSubmit} encType='multipart/form-data'>
       <div className='image-input'>
         <label htmlFor='fileInput'>
           <img src={image ? URL.createObjectURL(image) : defaultImage} alt='Car Type' className='image-preview' />
@@ -60,14 +61,15 @@ function Create({ onCreate, }) {
           Mô tả:
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
         </label>
-        <SaveButton />
+        <SaveButton onClick={handleSubmit}/>
       </div>
     </form>
   );
 }
 
-Create.propTypes = {
-  onCreate: PropTypes.func,
+Update.propTypes = {
+  onUpdate: PropTypes.func,
+  type: PropTypes.object,
 };
 
-export default Create;
+export default Update;

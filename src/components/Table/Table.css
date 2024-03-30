@@ -1,0 +1,27 @@
+#Table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
+
+#Table thead {
+    background-color: #f2f2f2;
+}
+
+#Table th, #Table td {
+    padding: 16px;
+    text-align: left;
+}
+
+#Table tbody tr:nth-child(even) {
+    background-color:  #f2f2f2;
+}
+
+/* CSS cho hover */
+#Table tbody tr:hover {
+    background-color: #e8e8e8;
+    transition: background-color 0.3s;
+}

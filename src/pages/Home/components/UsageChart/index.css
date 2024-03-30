@@ -1,0 +1,36 @@
+#usage-chart {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+#usage-chart h2 {
+    margin-bottom: 20px;
+}
+
+#usage-chart .input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#usage-chart .input-container label {
+    margin-right: 10px;
+}
+
+#usage-chart .input-container input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#usage-chart .chart-container {
+    width: 100%;
+    height: 400px;
+}
+
+#usage-chart label {
+    line-height: 34px;
+    margin-left: 10px;
+}

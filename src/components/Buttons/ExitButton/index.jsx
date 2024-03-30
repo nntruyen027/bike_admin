@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './UpdateButton.css';
+import './ExitButton.css';
 
-function UpdateButton({ onClick, }) {
-  return <button id={'UpdateButton'} onClick={onClick}>Chỉnh sửa</button>;
+function ExitButton({ onClick, }) {
+  return <button id={'ExitButton'} onClick={onClick}>Thoát</button>;
 }
 
-UpdateButton.propTypes = {
+ExitButton.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default UpdateButton;
+export default ExitButton;

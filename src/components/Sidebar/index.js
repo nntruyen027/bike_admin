@@ -13,7 +13,7 @@ import { useLayoutEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
 
 // eslint-disable-next-line react/prop-types
-export default function Sidebar({ setCurrentPage, setAccessToken, setRefreshToken, }) {
+export default function Index({ setCurrentPage, setAccessToken, }) {
   const title = [
     'Trang chủ', 'Danh mục', 'Sự kiện', 'Thiết bị', 'Người dùng', 'Phản hồi',
     'Trò chuyện','', 'Tên', 'Đăng xuất',
@@ -50,7 +50,6 @@ export default function Sidebar({ setCurrentPage, setAccessToken, setRefreshToke
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
     setAccessToken('');
-    setRefreshToken('');
     setCurrentPage('Trang chủ');
   }
 
@@ -120,7 +119,7 @@ export default function Sidebar({ setCurrentPage, setAccessToken, setRefreshToke
   );
 }
 
-Sidebar.proTypes = {
+Index.proTypes = {
   currentPage: PropTypes.string.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
 };

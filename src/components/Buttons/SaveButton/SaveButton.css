@@ -1,4 +1,4 @@
-#UpdateButton {
+#SaveButton {
     width: 100px;
     height: 40px;
     flex-shrink: 0;
@@ -13,9 +13,11 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-right: 10px;
+
 }
 
-#UpdateButton:hover {
+#SaveButton:hover {
     cursor: pointer;
 
     color: #FFFFFF;

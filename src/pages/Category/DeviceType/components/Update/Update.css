@@ -1,45 +1,42 @@
-.add-car-type-form {
-    max-width: 600px;
-    margin: 0 auto;
+#update-car-type-form {
+    width: 100%;
     display: flex;
     padding-right: 10px;
 }
 
-.image-input {
-    margin-top: 20px;
-    margin-right: 20px;
-    position: relative;
+#update-car-type-form .image-input {
+    flex: 1;
+    width: 50%;
 }
 
-.image-input label {
+#update-car-type-form .image-input label {
     display: block;
     margin-bottom: 10px;
 }
 
-.image-input input[type="file"] {
+#update-car-type-form .image-input input[type="file"] {
     display: none;
 }
 
-.image-preview {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+#update-car-type-form .image-preview {
+    width: 100%;
+    height: auto;
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.info-input {
+#update-car-type-form .info-input {
     flex: 1;
 }
 
-.info-input label {
+#update-car-type-form .info-input label {
     display: block;
     margin-bottom: 10px;
 }
 
-.info-input input[type="text"],
-.info-input textarea {
+#update-car-type-form .info-input input[type="text"],
+#update-car-type-form .info-input textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
