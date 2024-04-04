@@ -5,7 +5,8 @@ import Event from './Event';
 import User from './User';
 import Feedback from './Feedback';
 import Device from './Device';
+import Chat from './Chat';
 
 export {
-  Login, Category, Home, Event, User, Feedback, Device,
+  Login, Category, Home, Event, User, Feedback, Device, Chat,
 };

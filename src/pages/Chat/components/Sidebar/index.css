@@ -1,0 +1,42 @@
+#chat-sidebar {
+    flex: 0 0 20%;
+    border-right: 2px solid #76767CCC;
+    padding: 10px;
+}
+
+#chat-sidebar .item {
+    display: flex;
+    width: 80%;
+    padding: 10px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid #76767CCC;
+}
+#chat-sidebar .item:hover {
+    cursor: pointer;
+}
+
+
+#chat-sidebar .item .username {
+    width: 100px;
+    height: 20px;
+    color: #000929;
+    font-family: 'Inter', serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.28px;
+    text-align: left;
+}
+
+#chat-sidebar .item .content {
+    color: rgba(118, 118, 124, 0.80);
+    font-family: 'Inter', serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.24px;
+}

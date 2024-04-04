@@ -1,6 +1,6 @@
 import './index.css';
 import HomeHeader from './components/Header';
-import { UsageChart, } from './components';
+import { UsageChart, RevenueChart, } from './components';
 import React from 'react';
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
     <div id={'Home'}>
       <HomeHeader/>
       <UsageChart/>
+      <RevenueChart/>
     </div>
   );
 }

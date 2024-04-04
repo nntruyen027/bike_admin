@@ -1,0 +1,6 @@
+#chat-component {
+    position: absolute;
+    left: 15%;
+    width: 80%;
+    display: flex;
+}

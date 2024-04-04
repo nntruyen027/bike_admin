@@ -4,6 +4,7 @@ import Table from '~/components/Table';
 import { DeleteButton, UpdateButton, } from '~/components';
 import Modal from '~/components/Modal';
 import { Create, Update, Filter, } from './components';
+import QRCode from 'qrcode.react';
 
 export default function TransactionPoint() {
   const [transactions, setTransactions, ] = useState([]);
@@ -136,6 +137,11 @@ export default function TransactionPoint() {
     );
   };
 
+  // eslint-disable-next-line react/prop-types
+  const QRComponent = ({ data, }) => {
+    return <QRCode value={data}/>;
+  };
+  
   return (
     <>
       <Filter data={filterData} setData={setFilterData} originData={transactions} showCreateModal={() => setShowCreate(!showCreate)}/>
@@ -145,6 +151,8 @@ export default function TransactionPoint() {
           {
             label: 'ID',
             key: 'id',
+            component: QRComponent,
+            type: 'component',
           },
           {
             label: 'Điểm giao dịch',
