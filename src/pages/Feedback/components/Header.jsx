@@ -1,30 +1,28 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentDots,
+import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
+import { faCommentDots,
   faScrewdriverWrench,
-  faTriangleExclamation,
-} from "@fortawesome/free-solid-svg-icons";
-import "./Header.css";
-import React from "react";
-import PropTypes from "prop-types";
+  faTriangleExclamation, } from '@fortawesome/free-solid-svg-icons';
+import './Header.css';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function FeedbackHeader({ currentTab, setCurrentTab }) {
+export default function FeedbackHeader({ currentTab, setCurrentTab, }) {
   return (
-    <div id={"Feedback-Header"}>
+    <div id={'Feedback-Header'}>
       <HeaderItem
-        title={"Đánh giá"}
+        title={'Đánh giá'}
         icon={faCommentDots}
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
       />
       <HeaderItem
-        title={"Báo cáo"}
+        title={'Báo cáo'}
         icon={faTriangleExclamation}
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
       />
       <HeaderItem
-        title={"Thu hồi xe"}
+        title={'Thu hồi xe'}
         icon={faScrewdriverWrench}
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -33,17 +31,17 @@ export default function FeedbackHeader({ currentTab, setCurrentTab }) {
   );
 }
 
-function HeaderItem({ title, icon, currentTab, setCurrentTab }) {
+function HeaderItem({ title, icon, currentTab, setCurrentTab, }) {
   function handleClick() {
     setCurrentTab(title);
   }
 
   return (
     <span
-      className={currentTab === title ? "Header-Item selected" : "Header-Item"}
+      className={currentTab === title ? 'Header-Item selected' : 'Header-Item'}
       onClick={handleClick}
     >
-      <FontAwesomeIcon className={"icon"} icon={icon} />
+      <FontAwesomeIcon className={'icon'} icon={icon} />
       <span>{title}</span>
     </span>
   );

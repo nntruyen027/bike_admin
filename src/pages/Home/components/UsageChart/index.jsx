@@ -90,10 +90,12 @@ const UsageChart = () => {
           <LineChart data={usageData}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='period' />
-            <YAxis />
-            <Tooltip />
+            <YAxis label={{
+              value: 'Lượt sử dụng', angle: -90,
+            }}/>
+            <Tooltip formatter={(value ) => ['Số lượt: ' + value,]} />
             <Legend />
-            <Line type='monotone' dataKey='count' stroke='#8884d8' />
+            <Line type='monotone' dataKey='count' name='Số lượt sử dụng' stroke='#8884d8' strokeWidth={3}/>
           </LineChart>
         </ResponsiveContainer>
       </div>

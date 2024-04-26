@@ -28,7 +28,7 @@ export default function Detail({ id, onDelete, onUpdate, }) {
     <>
       <div className='modal-content-inner'>
         <div className='left-section'>
-          <img src={process.env.REACT_APP_HOST_IMAGE_IP + '/' + data?.image}
+          <img src={process.env.REACT_APP_HOST_IMAGE_IP + '' + data?.image}
             alt={data?.name} className='car-type-image'/>
         </div>
         <div className='right-section'>

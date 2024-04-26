@@ -4,20 +4,24 @@ import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, } from '@fortawesome/free-solid-svg-icons';
 import React, { useLayoutEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
-import { CreateButton, } from '~/components';
+import { Loading, Pagination, } from '~/components';
 import Modal from '~/components/Modal';
-import { Create, Detail, } from '~/pages/Event/components';
+import { Create, Detail, Filter, } from '~/pages/Event/components';
 
 export default function Event() {
   const [showCreateModal, setShowCreateModal,] = useState(false);
   const [eventList, setEventList,] = useState([]);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  const [loading, setLoading,] = useState(true);
+  const [filterData, setFilterData,] = useState([]);
 
   useLayoutEffect(() => {
     getList();
-  }, []);
+  }, [currentPage,]);
 
   const getList = () => {
-    fetch(process.env.REACT_APP_HOST_IP + '/events/', {
+    fetch(process.env.REACT_APP_HOST_IP + `/events/?page=${currentPage}&limit=6`, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('access'),
@@ -25,7 +29,12 @@ export default function Event() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setEventList(data.data))
+      .then((data) => {
+        setEventList(data.data);
+        setFilterData(data.data);
+        setTotalPage(data.meta.total_pages);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -57,20 +66,22 @@ export default function Event() {
 
   return (
     <div id={'Event'}>
-      <CreateButton onClick={() => setShowCreateModal(!showCreateModal)} />
+      {loading && <Loading/>}
+      <Filter setFilterData={setFilterData} originData={eventList} onShowCreate={() => setShowCreateModal(!showCreateModal)}/>
       {showCreateModal && <Modal title={'Thêm sự kiện'} setShow={() => setShowCreateModal(!showCreateModal)}>
         <Create onCreate={onCreate}/>
       </Modal>}
-      {renderBody(eventList, getList)}
+      {renderBody(eventList, getList, filterData)}
+      <Pagination currentPage={currentPage} totalPage={totalPage} onPageChange={setCurrentPage}/>
     </div>
   );
 }
 
-function renderBody(eventList, getList) {
+function renderBody(eventList, getList, filterData) {
 
   return (
     <div id={'Event-Body'}>
-      {eventList?.map((event, index) => <EventItem key={index} event={event} getList={getList}/>)}
+      {filterData?.map((event, index) => <EventItem key={index} event={event} getList={getList}/>)}
     </div>
   );
 }
@@ -134,9 +145,10 @@ function EventItem({ event, getList, }) {
         {
           imageError ? <img src={process.env.PUBLIC_URL + '/assets/images/category/image-input.png'}
             alt={'Ảnh lỗi'}/> :
-            <img src={(process.env.REACT_APP_HOST_IMAGE_IP + '/' + event?.poster)} alt={event.name}
+            <img src={(process.env.REACT_APP_HOST_IMAGE_IP + '' + event?.poster)} alt={event.name}
               onError={handleImageError}/> }
-        <div className={'event-name'}>{event.name}
+        <div className={'event-name'}>
+          <p>{event.name}</p>
           {<EventState event={event} />}
         </div>
         <div className={'event-times'}>

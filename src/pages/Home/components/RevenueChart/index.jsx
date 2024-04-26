@@ -76,6 +76,10 @@ const RevenueChart = () => {
     fetchData(startDate, e.target.value);
   };
 
+  const formatCurrency = value => new Intl.NumberFormat('vi-VN', {
+    style: 'currency', currency: 'VND', 
+  }).format(value);
+
   return (
     <div id='revenue-chart'>
       <h2>Thống kê doanh số</h2>
@@ -90,10 +94,10 @@ const RevenueChart = () => {
           <LineChart data={revenueData}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='period' />
-            <YAxis />
+            <YAxis tickFormatter={formatCurrency} />
             <Tooltip />
             <Legend />
-            <Line type='monotone' dataKey='revenue' stroke='#8884d8' />
+            <Line type='monotone' dataKey='revenue' stroke='#8884d8' name='Doanh thu' strokeWidth={3} />
           </LineChart>
         </ResponsiveContainer>
       </div>

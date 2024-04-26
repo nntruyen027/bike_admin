@@ -4,6 +4,7 @@ import DeviceType from './DeviceType';
 import TransactionPoint from './TransactionPoint';
 import React from 'react';
 import Header from './components/Header';
+import Notification from '~/pages/Category/Notification';
 
 export default function Category() {
   const [currentTab, setCurrentTab,] = useState('Loại xe');
@@ -14,6 +15,9 @@ export default function Category() {
     }
     else if(currentTab === 'Điểm giao dịch') {
       return <TransactionPoint/>;
+    }
+    else if(currentTab === 'Thông báo') {
+      return <Notification/>;
     }
   }
 

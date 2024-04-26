@@ -4,33 +4,33 @@ import PropTypes from 'prop-types';
 import { SaveButton, } from '~/components';
 
 export default function Create({ onCreate, }) {
-  const [name, setName,] = useState('');
-  const [address, setAddress,] = useState('');
+  const [title, setTitle,] = useState('');
+  const [text, setText,] = useState('');
 
   const handleSubmit = () => {
-    if (!name || !address) {
+    if (!title || !text) {
       alert('Vui lòng điền đầy đủ thông tin.');
       return;
     }
     onCreate({
-      name,
-      address,
+      title,
+      text,
     });
 
-    setName('');
-    setAddress('');
+    setTitle('');
+    setText('');
   };
 
   return (
     <div className='simple-form'>
       <div className='info-input'>
         <label>
-          Tên:
-          <input type='text' value={name} onChange={(e) => setName(e.target.value)}/>
+          Tiêu đề:
+          <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
         </label>
         <label>
-          Địa chỉ:
-          <input type='text' value={address} onChange={(e) => setAddress(e.target.value)}/>
+          Nội dung:
+          <textarea rows={10} value={text} onChange={(e) => setText(e.target.value)}/>
         </label>
       </div>
       <SaveButton onClick={handleSubmit}/>

@@ -34,3 +34,7 @@
     line-height: 34px;
     margin-left: 10px;
 }
+
+.recharts-surface {
+    height: 96% !important;
+}

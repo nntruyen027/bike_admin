@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import "./index.css";
-import PropTypes from "prop-types";
+import React, { useEffect, useState, } from 'react';
+import './index.css';
+import PropTypes from 'prop-types';
 
-export default function Detail({ id }) {
-  const [feedback, setFeedback] = useState(null);
-  const [event, setEvent] = useState(null);
+export default function Detail({ id, }) {
+  const [feedback, setFeedback,] = useState(null);
+  const [event, setEvent,] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_IP}/feedbacks/events/${id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
       },
-      method: "GET",
+      method: 'GET',
     })
       .then((res) =>
-        res.status === 200 ? res.json() : Promise.reject(res.json()),
+        res.status === 200 ? res.json() : Promise.reject(res.json())
       )
       .then((data) => {
         setFeedback(data.data);
@@ -27,13 +27,13 @@ export default function Detail({ id }) {
   const getEvent = (id) => {
     fetch(`${process.env.REACT_APP_HOST_IP}/events/${id}/`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+        Accept: 'application/json',
       },
-      method: "GET",
+      method: 'GET',
     })
       .then((res) =>
-        res.status === 200 ? res.json() : Promise.reject(res.json()),
+        res.status === 200 ? res.json() : Promise.reject(res.json())
       )
       .then((data) => {
         setEvent(data.data);
@@ -42,8 +42,8 @@ export default function Detail({ id }) {
   };
 
   return (
-    <div id="feedback-detail-component">
-      <div className="feedback-details">
+    <div id='feedback-detail-component'>
+      <div className='feedback-details'>
         <p>
           <strong>Tiêu đề:</strong> {feedback?.title}
         </p>
@@ -60,7 +60,7 @@ export default function Detail({ id }) {
           <strong>Ngày tạo:</strong> {feedback?.created_at}
         </p>
       </div>
-      <div className="feedback-images">
+      <div className='feedback-images'>
         {feedback?.feedback_images?.map((item) => (
           <img
             key={item.src}

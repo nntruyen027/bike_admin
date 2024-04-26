@@ -1,16 +1,18 @@
 import React, { useEffect, useState, } from 'react';
 import Table from '~/components/Table';
-import { Modal, UpdateButton, } from '~/components';
+import { Modal, Pagination, UpdateButton, } from '~/components';
 import { UpdateActive, } from './components';
 
 export default function CustomerList() {
   const [users, setUsers,] = useState([]);
   const [updateCustomer, setUpdateCustomer,] = useState(false);
   const [customerId, setCustomerId,] = useState(null);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
 
   useEffect(() => {
     getCustomer();
-  }, []);
+  }, [currentPage,]);
 
   const getCustomer = () => {
     fetch(`${process.env.REACT_APP_HOST_IP}/user/`, {
@@ -29,6 +31,7 @@ export default function CustomerList() {
             is_banned: item.is_banned ? 'Cấm': 'Bình thường',
           };
         });
+        setTotalPage(data.meta.total_pages);
         setUsers(users);
       })
       .catch(error => console.log(error));
@@ -77,25 +80,28 @@ export default function CustomerList() {
   };
 
   return (
-    <Table data={users} columns={[
-      {
-        key: 'full_name', label: 'Khách hàng',
-      },
-      {
-        key: 'phone', label: 'Số điện thoại',
-      },
-      {
-        key: 'is_female', label: 'Giới tính',
-      },
-      {
-        key: 'email', label: 'Email',
-      },
-      {
-        key: 'is_banned', label: 'Trạng thái hoạt động',
-      },
-      {
-        key: 'username', label: '', type: 'component', component: buttonGroup,
-      },
-    ]}/>
+    <>
+      <Table data={users} columns={[
+        {
+          key: 'full_name', label: 'Khách hàng',
+        },
+        {
+          key: 'phone', label: 'Số điện thoại',
+        },
+        {
+          key: 'is_female', label: 'Giới tính',
+        },
+        {
+          key: 'email', label: 'Email',
+        },
+        {
+          key: 'is_banned', label: 'Trạng thái hoạt động',
+        },
+        {
+          key: 'username', label: '', type: 'component', component: buttonGroup,
+        },
+      ]}/>
+      <Pagination onPageChange={setCurrentPage} totalPage={totalPage} currentPage={currentPage}/>
+    </>
   );
 }

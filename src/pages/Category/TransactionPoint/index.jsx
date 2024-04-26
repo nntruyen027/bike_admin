@@ -1,7 +1,7 @@
 import './TransactionPoint.css';
 import React, { useEffect, useState, } from 'react';
 import Table from '~/components/Table';
-import { DeleteButton, UpdateButton, } from '~/components';
+import { DeleteButton, Loading, Pagination, UpdateButton, } from '~/components';
 import Modal from '~/components/Modal';
 import { Create, Update, Filter, } from './components';
 import QRCode from 'qrcode.react';
@@ -12,13 +12,16 @@ export default function TransactionPoint() {
   const [showUpdate, setShowUpdate,] = useState(false);
   const [selectedId, setSelectedId,] = useState(null);
   const [filterData, setFilterData,] = useState([]);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  const [loading, setLoading,] = useState(true);
 
   useEffect(() => {
     handleGetList();
-  }, []);
+  }, [currentPage,]);
   
   const handleGetList = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/?page=${currentPage}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access'),
@@ -28,7 +31,9 @@ export default function TransactionPoint() {
       .then(res => res.json())
       .then(data => {
         setTransactions(data.data);
+        setTotalPage(data?.meta?.total_pages);
         setFilterData(data.data);
+        setLoading(false);
       })
       .catch(err => alert(err));
   };
@@ -144,6 +149,7 @@ export default function TransactionPoint() {
   
   return (
     <>
+      {loading && <Loading/>}
       <Filter data={filterData} setData={setFilterData} originData={transactions} showCreateModal={() => setShowCreate(!showCreate)}/>
       <Table
         data={filterData}
@@ -170,6 +176,7 @@ export default function TransactionPoint() {
           },
         ]}
       />
+      <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={setCurrentPage}/>
       {showCreate && (
         <Modal
           setShow={setShowCreateLocation}

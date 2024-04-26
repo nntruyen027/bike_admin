@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 export default function Index({ setCurrentPage, setAccessToken, }) {
   const title = [
     'Trang chủ', 'Danh mục', 'Sự kiện', 'Thiết bị', 'Người dùng', 'Phản hồi',
-    'Trò chuyện','', 'Tên', 'Đăng xuất',
+    'Trò chuyện','', 'Trang cá nhân', 'Đăng xuất',
   ];
 
   const [showSidebar, setShowSidebar,] = useState(false);

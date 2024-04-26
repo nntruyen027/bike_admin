@@ -1,0 +1,23 @@
+#top-used-table {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+#top-used-table .input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#top-used-table .input-container label {
+  transform: translateY(5px);
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#top-used-table  .input-container input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}

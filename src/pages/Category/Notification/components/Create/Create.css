@@ -3,6 +3,7 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
+    font-family: 'Inter', sans-serif;
 }
 
 .info-input label {
@@ -17,8 +18,20 @@
     border-radius: 4px;
 }
 
+.info-input textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .info-input input[type="text"]:focus {
     outline: none;
     border-color: #007bff;
 }
+.info-input textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
 
