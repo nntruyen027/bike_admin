@@ -2,9 +2,9 @@ import './index.css';
 import HomeHeader from './components/Header';
 import { UsageChart, RevenueChart, WeekChart, RevenueComparisonChart, TopUsedTable, TopRevenueTable, ContentTable, } from './components';
 import React from 'react';
-// import { PDFDownload, } from '~/components';
 
 export default function Home() {
+
   const content = () => {
     return (
       <>
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div id={'Home'}>
-      {/* <PDFDownload/> */}
+      <button >Generate PDF</button>
       {content()}
     </div>
   );

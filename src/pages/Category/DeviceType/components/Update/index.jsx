@@ -24,7 +24,7 @@ function Update({ onUpdate, type, }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !description || !image) {
+    if (!name || !description) {
       alert('Vui lòng điền đầy đủ thông tin và chọn hình ảnh.');
       return;
     }

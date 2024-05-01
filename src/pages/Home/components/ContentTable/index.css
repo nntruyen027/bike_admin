@@ -15,7 +15,13 @@
 }
 
 
-#content-table a {
+#content-table li, #content-table a {
   text-decoration: none;
   color: black;
+  margin: 5px 0;
+}
+
+#content-table li:hover {
+  text-decoration: double;
+  font-size: 17px;
 }

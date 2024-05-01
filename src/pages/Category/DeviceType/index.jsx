@@ -56,10 +56,15 @@ export default function DeviceType() {
 
   const handleCreateType = ({ image, name, description, price, }) => {
     const form = new FormData();
-    form.append('name', name);
-    form.append('description', description);
-    form.append('image', image);
-    form.append('price', price);
+
+    if(name)
+      form.append('name', name);
+    if(description)
+      form.append('description', description);
+    if(image)
+      form.append('image', image);
+    if(price)
+      form.append('price', price);
 
     console.log(price, image);
 
@@ -89,8 +94,6 @@ export default function DeviceType() {
     form.append('name', name);
     if(newImage)
       form.append('image', newImage);
-    else
-      form.append('image', image);
     form.append('description', description);
     form.append('price', price);
 
