@@ -1,0 +1,49 @@
+#my-info {
+    position: absolute;
+    left: 15%;
+    width: 80%;
+    display: flex;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+#my-info .avatar {
+    margin-right: 50px;
+}
+
+#my-info .avatar img {
+    width: 300px;
+    height: 300px;
+}
+
+#my-info .info{
+    text-align: left;
+}
+
+#my-info .info .fullname {
+    color: #2D3748;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 56px */
+
+    margin-bottom: 20px;
+}
+
+#my-info .info .email {
+    color: #718096;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 33.6px */
+    text-decoration-line: underline;
+    margin-bottom: 20px;
+}
+
+#my-info .info .phone , #my-info .info .address{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 33.6px */
+    margin-bottom: 20px;
+}
+

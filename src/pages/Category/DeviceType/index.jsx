@@ -4,18 +4,22 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, } from 'react';
 import { Create, Detail, Filter, } from './components';
 import Modal from '~/components/Modal';
+import { Loading, Pagination, } from '~/components';
 
 export default function DeviceType() {
   const [deviceList, setDeviceList,] = useState([]);
   const [filterDevice, setFilterDevice,] = useState([]);
   const [showCreate, setShowCreate,] = useState(false);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  const [loading ,setLoading,] = useState(true);
 
   useEffect(() => {
     fetchDeviceList();
-  }, []);
+  }, [currentPage,]);
 
   const fetchDeviceList = () => {
-    fetch(process.env.REACT_APP_HOST_IP + '/bicycles/types/', {
+    fetch(process.env.REACT_APP_HOST_IP + `/bicycles/types/?page=${currentPage}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access'),
@@ -25,7 +29,9 @@ export default function DeviceType() {
       .then(res => res.json())
       .then(data => {
         setDeviceList(data.data);
+        setTotalPage(data?.meta?.total_pages);
         setFilterDevice(data.data);
+        setLoading(false);
       })
       .catch(error => console.log(error));
   };
@@ -50,10 +56,15 @@ export default function DeviceType() {
 
   const handleCreateType = ({ image, name, description, price, }) => {
     const form = new FormData();
-    form.append('name', name);
-    form.append('description', description);
-    form.append('image', image);
-    form.append('price', price);
+
+    if(name)
+      form.append('name', name);
+    if(description)
+      form.append('description', description);
+    if(image)
+      form.append('image', image);
+    if(price)
+      form.append('price', price);
 
     console.log(price, image);
 
@@ -83,8 +94,6 @@ export default function DeviceType() {
     form.append('name', name);
     if(newImage)
       form.append('image', newImage);
-    else
-      form.append('image', image);
     form.append('description', description);
     form.append('price', price);
 
@@ -110,11 +119,13 @@ export default function DeviceType() {
 
   return (
     <div id={'Device-Type'}>
+      {loading && <Loading/> }
       <Filter showCreateModal={showCreateModal} originData={deviceList} data={filterDevice} setData={setFilterDevice}/>
       {filterDevice?.map(device => (
         <DeviceItem key={device.id} device={device} onDelete={handleDeleteDevice} onUpdate={handleEditDevice}/>
       ))}
       {showCreate && <Modal title={'Thêm loại xe'} setShow={showCreateModal}><Create onCreate={handleCreateType}/></Modal>}
+      <Pagination currentPage={currentPage} onPageChange={setCurrentPage} totalPage={totalPage}/>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faPersonBiking, } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faLocationDot, faPersonBiking, } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 import React from 'react';
 
@@ -10,6 +10,8 @@ export default function CategoryHeader({ currentTab, setCurrentTab, }) {
       <HeaderItem title={'Loại xe'} icon={faPersonBiking} currentTab={currentTab}
         setCurrentTab={setCurrentTab}/>
       <HeaderItem title={'Điểm giao dịch'} icon={faLocationDot} currentTab={currentTab}
+        setCurrentTab={setCurrentTab}/>
+      <HeaderItem title={'Thông báo'} icon={faBell} currentTab={currentTab}
         setCurrentTab={setCurrentTab}/>
     </div>
   );

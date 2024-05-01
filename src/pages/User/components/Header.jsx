@@ -5,7 +5,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function UserHeader({ currentTab, setCurrentTab, }) {
-
   return (
     <div id={'User-Header'} >
       <HeaderItem title={'Khách hàng'} icon={faUser} currentTab={currentTab}

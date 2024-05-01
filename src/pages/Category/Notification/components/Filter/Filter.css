@@ -1,0 +1,23 @@
+#Location-Filter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#Location-Filter span {
+    margin-right: 8px;
+}
+
+#Location-Filter select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#Location-Filter select + span {
+    margin-left: 8px;
+}
+
+#Location-Filter button {
+    margin-right: 50%;
+}

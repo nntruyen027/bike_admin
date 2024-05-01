@@ -1,0 +1,66 @@
+/* CSS cho phần Detail */
+#detail {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto; /* Tạo thanh cuộn cho phần Detail khi cần */
+    padding: 20px; /* Thêm padding để tạo khoảng cách giữa phần Sidebar và Detail */
+}
+
+#detail .messages {
+    flex-grow: 1;
+    overflow-y: auto; /* Tạo thanh cuộn cho phần tin nhắn trong Detail */
+}
+
+#detail .input-container {
+    margin-top: auto; /* Đặt khung nhập tin nhắn luôn ở dưới cùng */
+}
+
+#detail .input-container input[type="text"] {
+    width: calc(100% - 130px); /* Chiều rộng của input */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#detail .input-container button {
+    margin:0;
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    float: right;
+}
+
+#detail .input-container button:hover {
+    background-color: #0056b3;
+}
+
+/* CSS cho tin nhắn */
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.message .sender {
+    font-weight: bold;
+    margin-right: 10px;
+
+}
+
+.message .content {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.message.sent .content {
+    background-color: #007bff;
+    color: white;
+    order: 1; /* Chuyển tin nhắn của bạn xuống phía dưới */
+}

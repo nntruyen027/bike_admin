@@ -1,0 +1,31 @@
+#form-container {
+    max-width: 800px;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#form-container input[type="text"],
+#form-container input[type="email"],
+#form-container input[type="tel"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#form-container button {
+    margin-top: 30px;
+}
+

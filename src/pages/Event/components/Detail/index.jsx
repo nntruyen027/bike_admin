@@ -47,7 +47,7 @@ export default function Detail ({ id, onDelete, onUpdate, }) {
     <div id={'event-detail'} className='modal-content'>
       {image && (
         <div className='event-image'>
-          <img src={`${process.env.REACT_APP_HOST_IMAGE_IP}/${image}`} alt='Sự kiện'/>
+          <img src={`${process.env.REACT_APP_HOST_IMAGE_IP}${image}`} alt='Sự kiện'/>
         </div>)}
       <div className='event-info'>
         <div>

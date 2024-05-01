@@ -37,9 +37,6 @@
 
 }
 
-#Sidebar .selected .icon {
-}
-
 
 #Sidebar>*:hover {
     cursor: pointer;
@@ -78,11 +75,17 @@
 #Sidebar #avatar {
     display: block;
     border-radius: 35px;
-    padding: 10px;
+    padding: 0 10px;
     align-items: center;
     gap: 25px;
 }
 
 #Sidebar #avatar img {
     width: 30px;
+    margin-top: 10px;
+}
+
+#Sidebar #avatar .name{
+    line-height: 50px;
+    transform: translateY(-10px);
 }

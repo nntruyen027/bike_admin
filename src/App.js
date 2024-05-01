@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useLayoutEffect, useState, } from 'react';
 import { Header, Sidebar, } from '~/components';
-import { Category, Event, Feedback, Home, Login, User, Device, } from '~/pages';
+import { Category, Event, Feedback, Home, Login, User, Device, Chat, Info, } from '~/pages';
 import '~/fonts/inter';
 import '~/fonts/source-sans-pro';
 
@@ -18,7 +18,11 @@ function App() {
 
   const renderPage = () => {
     if (currentPage === 'Trang chủ') {
-      return <Home />;
+      return (<>
+        <Home />
+
+        {/* <PDFDownload/> */}
+      </>);
     } else if (currentPage === 'Danh mục') {
       return <Category/>;
     }
@@ -33,6 +37,12 @@ function App() {
     }
     else if(currentPage === 'Phản hồi') {
       return <Feedback/>;
+    }
+    else if(currentPage === 'Trò chuyện') {
+      return <Chat/>;
+    }
+    else if(currentPage === 'Trang cá nhân'){
+      return <Info/>;
     }
   };
 

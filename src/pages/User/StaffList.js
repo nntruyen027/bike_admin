@@ -1,18 +1,20 @@
 import React, { useEffect, useState, } from 'react';
 import Table from '~/components/Table';
-import { CreateButton, DeleteButton, Modal, } from '~/components';
+import { CreateButton, DeleteButton, Modal, Pagination, } from '~/components';
 import { Create, } from '~/pages/User/components';
 
 export default function StaffList() {
   const [staffs, setStaffs,] = useState([]);
   const [addUser, setAddUser,] = useState(false);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
 
   useEffect(() => {
     getStaffs();
-  }, []);
+  }, [currentPage,]);
 
   const getStaffs = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/admin-user/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/admin-user/?page=${currentPage}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
         Accept: 'application/json',
@@ -27,6 +29,7 @@ export default function StaffList() {
           };
         });
         setStaffs(users);
+        setTotalPage(data.meta.total_pages);
       })
       .catch((error) => console.log(error));
   };
@@ -110,6 +113,7 @@ export default function StaffList() {
           key:'username', label: '', type: 'component', component: deleteContainer,
         },
       ]} />
+      <Pagination currentPage={currentPage} totalPage={totalPage} onPageChange={setCurrentPage}/>
     </>
   );
 }

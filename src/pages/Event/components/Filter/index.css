@@ -1,0 +1,23 @@
+#Event-Filter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+#Event-Filter select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#Event-Filter select + span {
+    margin-left: 8px;
+}
+
+#Event-Filter button {
+    margin-right: 70%;
+}
+
+

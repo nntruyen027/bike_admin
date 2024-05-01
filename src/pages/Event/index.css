@@ -6,10 +6,6 @@
     text-align: left;
 }
 
-#Event-Body {
-    margin-top: 60px;
-}
-
 #Event .Event-Item {
     display: inline-block;
 
@@ -43,7 +39,18 @@
     line-height: normal;
 
     margin-left: 20px;
+    overflow: hidden;
 }
+#Event .event-name p{
+    white-space: nowrap;
+    width: 70%;
+    display: inline-block;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*max-width: 20ch;*/
+}
+
 
 #Event .event-state {
     float: right;

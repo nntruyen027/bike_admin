@@ -3,7 +3,7 @@ import React, { useEffect, useState, } from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import Table from '~/components/Table';
-import { DeleteButton, Modal, UpdateButton, } from '~/components';
+import { DeleteButton, Loading, Modal, Pagination, UpdateButton, } from '~/components';
 import { Create, Filter, Update, } from './components';
 
 export default function Device() {
@@ -12,13 +12,16 @@ export default function Device() {
   const [bicycleList, setBicycleList,] = useState([]);
   const [selectedId, setSelectedId,] = useState(null);
   const [filterData, setFilterData,] = useState([]);
+  const [currentPage, setCurrentPage,] = useState(1);
+  const [totalPage, setTotalPage,] = useState(0);
+  const [loading, setLoading,] = useState(true);
 
   useEffect(() => {
     handleGetDevices();
-  }, []);
+  }, [currentPage,]);
 
   const handleGetDevices = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/?page=${currentPage}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('access'),
         Accept: 'application/json',
@@ -27,7 +30,9 @@ export default function Device() {
       .then((res) => res.json())
       .then((data) => {
         setBicycleList(data.data);
+        setTotalPage(data.meta.total_pages);
         setFilterData(data.data);
+        setLoading(false);
       })
       .catch((error) => alert(error));
   };
@@ -119,11 +124,13 @@ export default function Device() {
 
   return (
     <div id={'Device'}>
+      {loading && <Loading/>}
       <Filter filterData={filterData} setFilterData={setFilterData} originData={bicycleList} onShowCreate={() => { setAddDevice(!addDevice); }}/>
       {addDevice && <Modal title={'Thêm xe đạp'} setShow={() => { setAddDevice(!addDevice); }}>
         <Create onCreate={handleCreate} />
       </Modal>}
       {renderBody()}
+      <Pagination onPageChange={setCurrentPage} totalPage={totalPage} currentPage={currentPage}/>
     </div>
   );
 }

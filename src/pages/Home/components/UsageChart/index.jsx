@@ -27,7 +27,7 @@ const UsageChart = () => {
 
     fetch(`${process.env.REACT_APP_HOST_IP}/statistics/usage-statistics/?${queryParams.toString()}`)
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.ok) return res.json();
         else return Promise.reject(res.json());
       })
       .then(data => {
@@ -35,11 +35,15 @@ const UsageChart = () => {
           const defaultData = getDefaultData(start, end);
           setUsageData(defaultData);
         } else {
-          setUsageData(data.data);
+          const formattedData = data.data.map(item => ({
+            period: item.month,
+            count: item.count,
+          }));
+          setUsageData(formattedData);
         }
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Lỗi khi tải dữ liệu:', error);
       });
   };
 
@@ -49,7 +53,7 @@ const UsageChart = () => {
     const dateDiff = (endDateObj.getTime() - startDateObj.getTime()) / (1000 * 60 * 60 * 24);
     const defaultData = [];
 
-    for (let i = 0; i <= dateDiff; i+=30) {
+    for (let i = 0; i <= dateDiff; i += 10) {
       const date = new Date(startDateObj);
       date.setDate(startDateObj.getDate() + i);
       const formattedDate = date.toISOString().slice(0, 10);
@@ -62,24 +66,36 @@ const UsageChart = () => {
     return defaultData;
   };
 
+  const handleStartDateChange = e => {
+    setStartDate(e.target.value);
+    fetchData(e.target.value, endDate);
+  };
+
+  const handleEndDateChange = e => {
+    setEndDate(e.target.value);
+    fetchData(startDate, e.target.value);
+  };
+
   return (
     <div id='usage-chart'>
       <h2>Thống kê số lượt sử dụng</h2>
       <div className='input-container'>
         <label htmlFor='startDate'>Từ ngày:</label>
-        <input type='date' id='startDate' value={startDate} onChange={e => setStartDate(e.target.value)} />
+        <input type='date' id='startDate' value={startDate} onChange={handleStartDateChange} />
         <label htmlFor='endDate'>Đến ngày:</label>
-        <input type='date' id='endDate' value={endDate} onChange={e => setEndDate(e.target.value)} />
+        <input type='date' id='endDate' value={endDate} onChange={handleEndDateChange} />
       </div>
       <div className='chart-container'>
-        <ResponsiveContainer>
+        <ResponsiveContainer width='100%' height={400}>
           <LineChart data={usageData}>
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis dataKey='period' />
-            <YAxis />
-            <Tooltip />
+            <YAxis label={{
+              value: 'Lượt sử dụng', angle: -90,
+            }}/>
+            <Tooltip formatter={(value ) => ['Số lượt: ' + value,]} />
             <Legend />
-            <Line type='monotone' dataKey='count' stroke='#8884d8' />
+            <Line type='monotone' dataKey='count' name='Số lượt sử dụng' stroke='#8884d8' strokeWidth={3}/>
           </LineChart>
         </ResponsiveContainer>
       </div>
