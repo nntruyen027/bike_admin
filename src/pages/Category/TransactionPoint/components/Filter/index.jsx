@@ -4,23 +4,25 @@ import { locations, } from '~/constants'; //
 import './Filter.css';
 import { CreateButton, } from '~/components';
 
-export default function Filter({ data, setData, originData, showCreateModal, }) {
+export default function Filter({ setData, showCreateModal, }) {
   const [district, setDistrict,] = useState('Tất cả');
   const [ward, setWard,] = useState('Tất cả');
 
   useEffect(() => {
-    data = originData;
+
+    let filter = {
+      district: 'all', ward: 'all',
+    };
 
     if (district !== 'Tất cả') {
-      data = data.filter(item => item.address.includes(district));
+      filter.district = district;
     }
 
     if (ward !== 'Tất cả') {
-      data = data.filter(item => item.address.includes(ward));
+      filter.ward = ward;
     }
 
-    console.log(data, originData);
-    setData(data || originData);
+    setData(filter);
   }, [ward, district,]);
 
   // Lấy danh sách quận/huyện từ dữ liệu mẫu
@@ -51,8 +53,6 @@ export default function Filter({ data, setData, originData, showCreateModal, }) 
 }
 
 Filter.propTypes = {
-  data: PropTypes.array,
-  originData: PropTypes.array,
   setData: PropTypes.func,
   showCreateModal: PropTypes.func,
 };

@@ -22,7 +22,6 @@ export default function Home() {
 
   return (
     <div id={'Home'}>
-      <button >Generate PDF</button>
       {content()}
     </div>
   );

@@ -11,17 +11,18 @@ export default function TransactionPoint() {
   const [showCreate, setShowCreate,] = useState(false);
   const [showUpdate, setShowUpdate,] = useState(false);
   const [selectedId, setSelectedId,] = useState(null);
-  const [filterData, setFilterData,] = useState([]);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [loading, setLoading,] = useState(true);
+  const [district, setDistrict,] = useState('all');
+  const [ward, setWard,] = useState('all');
 
   useEffect(() => {
     handleGetList();
-  }, [currentPage,]);
+  }, [currentPage, district, ward,]);
   
   const handleGetList = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/?page=${currentPage}`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/?page=${currentPage}&district=${district}&ward=${ward}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access'),
@@ -32,10 +33,16 @@ export default function TransactionPoint() {
       .then(data => {
         setTransactions(data.data);
         setTotalPage(data?.meta?.total_pages);
-        setFilterData(data.data);
         setLoading(false);
       })
       .catch(err => alert(err));
+  };
+
+  const setFilterData = ({ district, ward, }) => {
+    if(district)
+      setDistrict(district);
+    if(ward)
+      setWard(ward);
   };
 
   const handleCreate = ({ name, address, }) => {
@@ -150,9 +157,9 @@ export default function TransactionPoint() {
   return (
     <>
       {loading && <Loading/>}
-      <Filter data={filterData} setData={setFilterData} originData={transactions} showCreateModal={() => setShowCreate(!showCreate)}/>
+      <Filter setData={setFilterData} showCreateModal={() => setShowCreate(!showCreate)}/>
       <Table
-        data={filterData}
+        data={transactions}
         columns={[
           {
             label: 'ID',

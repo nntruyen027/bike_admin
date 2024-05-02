@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useLayoutEffect, useState, } from 'react';
 import { Header, Sidebar, } from '~/components';
-import { Category, Event, Feedback, Home, Login, User, Device, Chat, Info, } from '~/pages';
+import { Category, Event, Feedback, Home, Login, User, Device, Info, } from '~/pages';
 import '~/fonts/inter';
 import '~/fonts/source-sans-pro';
 
@@ -37,9 +37,6 @@ function App() {
     }
     else if(currentPage === 'Phản hồi') {
       return <Feedback/>;
-    }
-    else if(currentPage === 'Trò chuyện') {
-      return <Chat/>;
     }
     else if(currentPage === 'Trang cá nhân'){
       return <Info/>;

@@ -5,28 +5,19 @@ import { CreateButton, } from '~/components';
 
 const statusOptions = ['Tất cả', 'Sắp diễn ra', 'Đang diễn ra', 'Đã diễn ra',];
 
-const Filter = ({ setFilterData, originData, onShowCreate, }) => {
+const Filter = ({ setFilterData, onShowCreate, }) => {
   const [selectedStatus, setSelectedStatus,] = useState('Tất cả');
 
   useEffect(() => {
-    if (selectedStatus === 'Tất cả') {
-      setFilterData(originData);
-    } else {
-      const filteredData = originData.filter(event => {
-        switch (selectedStatus) {
-        case 'Sắp diễn ra':
-          return new Date(event.begin_at) > new Date();
-        case 'Đang diễn ra':
-          return new Date(event.begin_at) <= new Date() && new Date(event.end_at) >= new Date();
-        case 'Đã diễn ra':
-          return new Date(event.end_at) < new Date();
-        default:
-          return false;
-        }
-      });
-      setFilterData(filteredData);
-    }
-  }, [selectedStatus, originData, setFilterData,]);
+    if(selectedStatus === 'Tất cả')
+      setFilterData('all');
+    else if(selectedStatus === 'Sắp diễn ra')
+      setFilterData('upcoming');
+    else if(selectedStatus === 'Đang diễn ra')
+      setFilterData('happening');
+    else 
+      setFilterData('past');
+  }, [selectedStatus,]);
 
   return (
     <div id='Event-Filter'>

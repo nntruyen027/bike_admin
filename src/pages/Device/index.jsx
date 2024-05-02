@@ -11,17 +11,19 @@ export default function Device() {
   const [updateDevice, setUpdateDevice,] = useState(false);
   const [bicycleList, setBicycleList,] = useState([]);
   const [selectedId, setSelectedId,] = useState(null);
-  const [filterData, setFilterData,] = useState([]);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [loading, setLoading,] = useState(true);
+  const [type, setType,] = useState('all');
+  const [location, setLocation,] = useState('all');
+  const [status, setStatus,] = useState('all');
 
   useEffect(() => {
     handleGetDevices();
-  }, [currentPage,]);
+  }, [currentPage, type, location, status,]);
 
   const handleGetDevices = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/?page=${currentPage}`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/?page=${currentPage}&status=${status}&location=${location}&type=${type}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('access'),
         Accept: 'application/json',
@@ -31,10 +33,15 @@ export default function Device() {
       .then((data) => {
         setBicycleList(data.data);
         setTotalPage(data.meta.total_pages);
-        setFilterData(data.data);
         setLoading(false);
       })
       .catch((error) => alert(error));
+  };
+
+  const setFilterData = ({ type, location, status, }) => {
+    setType(type);
+    setLocation(location);
+    setStatus(status);
   };
 
   const handleDeleteDevice = (id) => {
@@ -119,13 +126,13 @@ export default function Device() {
       key: 'id', component: ButtonGroup, label: '', type: 'component',
     },
 
-    ]} data={filterData} />;
+    ]} data={bicycleList} />;
   }
 
   return (
     <div id={'Device'}>
       {loading && <Loading/>}
-      <Filter filterData={filterData} setFilterData={setFilterData} originData={bicycleList} onShowCreate={() => { setAddDevice(!addDevice); }}/>
+      <Filter setFilterData={setFilterData} onShowCreate={() => { setAddDevice(!addDevice); }}/>
       {addDevice && <Modal title={'Thêm xe đạp'} setShow={() => { setAddDevice(!addDevice); }}>
         <Create onCreate={handleCreate} />
       </Modal>}

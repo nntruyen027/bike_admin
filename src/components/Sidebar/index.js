@@ -5,7 +5,6 @@ import { faArrowRightFromBracket,
   faBicycle,
   faCalendarCheck,
   faComment,
-  faComments,
   faGrip,
   faHouse,
   faUserGroup, } from '@fortawesome/free-solid-svg-icons';
@@ -15,8 +14,7 @@ import PropTypes from 'prop-types';
 // eslint-disable-next-line react/prop-types
 export default function Index({ setCurrentPage, setAccessToken, }) {
   const title = [
-    'Trang chủ', 'Danh mục', 'Sự kiện', 'Thiết bị', 'Người dùng', 'Phản hồi',
-    'Trò chuyện','', 'Trang cá nhân', 'Đăng xuất',
+    'Trang chủ', 'Danh mục', 'Sự kiện', 'Thiết bị', 'Người dùng', 'Phản hồi','', 'Trang cá nhân', 'Đăng xuất',
   ];
 
   const [showSidebar, setShowSidebar,] = useState(false);
@@ -98,11 +96,6 @@ export default function Index({ setCurrentPage, setAccessToken, }) {
         <FontAwesomeIcon className={'icon'} icon={faComment}/>
         <div className={'name'}></div>
       </div>
-      <div id={'chat'} className={'tab'} onClick={handleClick}>
-        <FontAwesomeIcon className={'icon'} icon={faComments}/>
-        <div className={'name'}></div>
-      </div>
-
       <div id={'line'}></div>
 
       <div id={'avatar'} className={'tab'} onClick={handleClick}>

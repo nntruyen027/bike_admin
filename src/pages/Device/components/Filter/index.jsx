@@ -5,7 +5,7 @@ import { CreateButton, } from '~/components';
 
 const status = ['Sẵn sàng sử dụng', 'Đang sữa chữa', 'Đang sử dụng', 'Ngưng sử dụng',];
 
-export default function Filter({ filterData, setFilterData, originData, onShowCreate, }) {
+export default function Filter({ setFilterData, onShowCreate, }) {
   const [bicycleTypes, setBicycleTypes,] = useState([]);
   const [selectedType, setSelectedType,] = useState('Tất cả');
   const [selectedStatus, setSelectedStatus,] = useState('Tất cả');
@@ -18,18 +18,20 @@ export default function Filter({ filterData, setFilterData, originData, onShowCr
   }, []);
 
   useEffect(() => {
-    filterData = originData;
+    let filter = {
+      location: 'all', type: 'all', status: 'all',
+    };
 
     if(selectedType !== 'Tất cả')
-      filterData = filterData.filter(item => item.type === selectedType);
+      filter.type = selectedType;
 
     if(selectedLocation !== 'Tất cả')
-      filterData = filterData.filter(item => item.location === selectedLocation);
+      filter.location = selectedLocation;
 
     if(selectedStatus !== 'Tất cả')
-      filterData = filterData.filter(item => item.status === selectedStatus);
+      filter.status = selectedStatus;
 
-    setFilterData(filterData || originData);
+    setFilterData(filter);
 
   }, [selectedStatus, selectedLocation, selectedType,]);
 
@@ -42,7 +44,7 @@ export default function Filter({ filterData, setFilterData, originData, onShowCr
       },
     })
       .then(res => res.json())
-      .then(data => setBicycleTypes(data.data.map(item => item.name)))
+      .then(data => setBicycleTypes(data.data))
       .catch(error => alert(error));
   };
 
@@ -55,7 +57,7 @@ export default function Filter({ filterData, setFilterData, originData, onShowCr
       },
     })
       .then(res => res.json())
-      .then(data => setLocations(data?.data?.map(item => item.name)))
+      .then(data => setLocations(data?.data))
       .catch(error => alert(error));
   };
 
@@ -65,11 +67,11 @@ export default function Filter({ filterData, setFilterData, originData, onShowCr
 
       <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
         <option key={'Tất cả'} value={'Tất cả'} label={'Tất cả'}/>
-        {bicycleTypes?.map(value => <option key={value} value={value} label={value}/>)}
+        {bicycleTypes?.map(value => <option key={value?.id} value={value?.id} label={value?.name}/>)}
       </select>
       <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
         <option key={'Tất cả'} value={'Tất cả'} label={'Tất cả'}/>
-        {locations?.map(value => <option key={value} value={value} label={value}/>)}
+        {locations?.map(value => <option key={value?.id} value={value?.id} label={value?.name}/>)}
       </select>
       <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
         <option key={'Tất cả'} value={'Tất cả'} label={'Tất cả'}/>
@@ -80,8 +82,6 @@ export default function Filter({ filterData, setFilterData, originData, onShowCr
 }
 
 Filter.propTypes = {
-  filterData: PropTypes.array,
   setFilterData: PropTypes.func,
   onShowCreate: PropTypes.func,
-  originData: PropTypes.array,
 };

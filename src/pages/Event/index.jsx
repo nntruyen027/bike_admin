@@ -14,14 +14,14 @@ export default function Event() {
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [loading, setLoading,] = useState(true);
-  const [filterData, setFilterData,] = useState([]);
+  const [status, setStatus,] = useState('all');
 
   useLayoutEffect(() => {
     getList();
-  }, [currentPage,]);
+  }, [currentPage, status,]);
 
   const getList = () => {
-    fetch(process.env.REACT_APP_HOST_IP + `/events/?page=${currentPage}&limit=6`, {
+    fetch(process.env.REACT_APP_HOST_IP + `/events/?page=${currentPage}&limit=6&status=${status}`, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('access'),
@@ -31,11 +31,14 @@ export default function Event() {
       .then((res) => res.json())
       .then((data) => {
         setEventList(data.data);
-        setFilterData(data.data);
         setTotalPage(data.meta.total_pages);
         setLoading(false);
       })
       .catch((error) => console.log(error));
+  };
+
+  const setFilterData = (status) => {
+    setStatus(status);
   };
 
   const onCreate = ({ name, address, image, beginAt, endAt, text, }) => {
@@ -67,21 +70,21 @@ export default function Event() {
   return (
     <div id={'Event'}>
       {loading && <Loading/>}
-      <Filter setFilterData={setFilterData} originData={eventList} onShowCreate={() => setShowCreateModal(!showCreateModal)}/>
+      <Filter setFilterData={setFilterData} onShowCreate={() => setShowCreateModal(!showCreateModal)}/>
       {showCreateModal && <Modal title={'Thêm sự kiện'} setShow={() => setShowCreateModal(!showCreateModal)}>
         <Create onCreate={onCreate}/>
       </Modal>}
-      {renderBody(eventList, getList, filterData)}
+      {renderBody(eventList, getList)}
       <Pagination currentPage={currentPage} totalPage={totalPage} onPageChange={setCurrentPage}/>
     </div>
   );
 }
 
-function renderBody(eventList, getList, filterData) {
+function renderBody(eventList, getList) {
 
   return (
     <div id={'Event-Body'}>
-      {filterData?.map((event, index) => <EventItem key={index} event={event} getList={getList}/>)}
+      {eventList?.map((event, index) => <EventItem key={index} event={event} getList={getList}/>)}
     </div>
   );
 }

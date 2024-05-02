@@ -8,18 +8,19 @@ import { Loading, Pagination, } from '~/components';
 
 export default function DeviceType() {
   const [deviceList, setDeviceList,] = useState([]);
-  const [filterDevice, setFilterDevice,] = useState([]);
   const [showCreate, setShowCreate,] = useState(false);
   const [currentPage, setCurrentPage,] = useState(1);
   const [totalPage, setTotalPage,] = useState(0);
   const [loading ,setLoading,] = useState(true);
+  const [priceFrom, setPriceFrom,] = useState('all');
+  const [priceTo, setPriceTo,] = useState('all');
 
   useEffect(() => {
     fetchDeviceList();
-  }, [currentPage,]);
+  }, [currentPage, priceFrom, priceTo,]);
 
   const fetchDeviceList = () => {
-    fetch(process.env.REACT_APP_HOST_IP + `/bicycles/types/?page=${currentPage}`, {
+    fetch(process.env.REACT_APP_HOST_IP + `/bicycles/types/?page=${currentPage}&price_from=${priceFrom}&price_to=${priceTo}`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access'),
@@ -30,10 +31,16 @@ export default function DeviceType() {
       .then(data => {
         setDeviceList(data.data);
         setTotalPage(data?.meta?.total_pages);
-        setFilterDevice(data.data);
         setLoading(false);
       })
       .catch(error => console.log(error));
+  };
+
+  const setFilterDevice = ({ fromPrice, toPrice, }) => {
+    if(fromPrice)
+      setPriceFrom(fromPrice);
+    if(toPrice)
+      setPriceTo(toPrice);
   };
 
   const handleDeleteDevice = (deletedDeviceId) => {
@@ -120,8 +127,8 @@ export default function DeviceType() {
   return (
     <div id={'Device-Type'}>
       {loading && <Loading/> }
-      <Filter showCreateModal={showCreateModal} originData={deviceList} data={filterDevice} setData={setFilterDevice}/>
-      {filterDevice?.map(device => (
+      <Filter showCreateModal={showCreateModal} setData={setFilterDevice}/>
+      {deviceList?.map(device => (
         <DeviceItem key={device.id} device={device} onDelete={handleDeleteDevice} onUpdate={handleEditDevice}/>
       ))}
       {showCreate && <Modal title={'Thêm loại xe'} setShow={showCreateModal}><Create onCreate={handleCreateType}/></Modal>}
