@@ -5,9 +5,8 @@ import './index.css';
 import { convertDatetimeToLocalString, convertToPostgresTimestamp, } from '~/pages/Event/functions';
 
 export default function Update ({ onUpdate, event, }) {
-  const defaultImage = process.env.PUBLIC_URL + 'assets/images/category/image-input.png';
   const [image, setImage,] = useState(null);
-  const [address, setAddress,] = useState(event.address);
+  const [address, setAddress,] = useState(event?.address);
   const [name, setName,] = useState(event.name);
   const [beginAt, setBeginAt,] = useState(convertDatetimeToLocalString(event.begin_at));
   const [endAt, setEndAt,] = useState(convertDatetimeToLocalString(event.end_at));
@@ -42,7 +41,7 @@ export default function Update ({ onUpdate, event, }) {
     <form id={'update-form'} onSubmit={handleSubmit}>
       <div className='image-input'>
         <label htmlFor='fileInput'>
-          <img src={image ? URL.createObjectURL(image) : defaultImage} alt='Car Type' className='image-preview'/>
+          <img src={image ? URL.createObjectURL(image) : `${process.env.REACT_APP_HOST_IMAGE_IP}${event?.poster}`} alt='Car Type' className='image-preview'/>
         </label>
         <input id='fileInput' type='file' accept='image/*' onChange={handleImageChange} style={{
           display: 'none',

@@ -19,7 +19,7 @@
 }
 
 #update-car-type-form .image-preview {
-    width: 100%;
+    width: 90%;
     height: auto;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -37,7 +37,7 @@
 
 #update-car-type-form .info-input input[type="text"],
 #update-car-type-form .info-input textarea {
-    width: 100%;
+    width: 94%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;

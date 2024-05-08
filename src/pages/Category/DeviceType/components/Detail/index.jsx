@@ -43,7 +43,7 @@ export default function Detail({ id, onDelete, onUpdate, }) {
         </div>
       </div>
       {showUpdateModal && <Modal title={'Chỉnh sửa thông tin'} setShow={showUpdate}>
-        <Update onUpdate={onUpdate} type={data} />
+        <Update onUpdate={onUpdate} type={data} setShow={showUpdate} />
       </Modal> }
     </>
 

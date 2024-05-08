@@ -19,7 +19,7 @@
 }
 
 #add-car-type-form .image-preview {
-    width: 100%;
+    width: 97%;
     height: auto;
     cursor: pointer;
     border: 1px solid #ccc;
@@ -27,12 +27,12 @@
 }
 
 #add-car-type-form .image-preview img {
-    width: 100%;
+    width: 98%;
     height: auto;
 }
 
 #add-car-type-form .info-input {
-    width: 50%;
+    width: 48%;
     flex: 1;
 }
 

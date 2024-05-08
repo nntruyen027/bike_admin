@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, } from 'react';
 import './Sidebar.css';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket,
@@ -16,6 +16,26 @@ export default function Index({ setCurrentPage, setAccessToken, }) {
   const title = [
     'Trang chủ', 'Danh mục', 'Sự kiện', 'Thiết bị', 'Người dùng', 'Phản hồi','', 'Trang cá nhân', 'Đăng xuất',
   ];
+
+  const [image, setImage,] = useState(null);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_HOST_IP}/info/`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access')}`,
+      },
+    })
+      .then(res => {
+        if(res.status === 200)
+          return res.json();
+        else {
+          return res.json().then(data => Promise.reject(data));
+        }
+      })
+      .then(data => setImage(data?.data?.avatar))
+      .catch(err => alert(err));
+  }, []);
 
   const [showSidebar, setShowSidebar,] = useState(false);
 
@@ -99,7 +119,7 @@ export default function Index({ setCurrentPage, setAccessToken, }) {
       <div id={'line'}></div>
 
       <div id={'avatar'} className={'tab'} onClick={handleClick}>
-        <img className={'avatar90'} alt={'Đây là avtar'} src={process.env.PUBLIC_URL + 'logo192.png'}/>
+        <img className={'avatar90'} alt={'Đây là avtar'} src={process.env.REACT_APP_HOST_IMAGE_IP + image}/>
         <div className={'name'}></div>
       </div>
 

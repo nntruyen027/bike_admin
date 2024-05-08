@@ -36,7 +36,7 @@ export default function Filter({ setFilterData, onShowCreate, }) {
   }, [selectedStatus, selectedLocation, selectedType,]);
 
   const getBicycleTypes = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/types/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/bicycles/types/?limit=10000`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -49,7 +49,7 @@ export default function Filter({ setFilterData, onShowCreate, }) {
   };
 
   const getLocations = () => {
-    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/`, {
+    fetch(`${process.env.REACT_APP_HOST_IP}/transactions/?limit=10000`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access')}`,

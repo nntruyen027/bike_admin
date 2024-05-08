@@ -22,6 +22,7 @@ export default function TransactionPoint() {
   }, [currentPage, district, ward,]);
   
   const handleGetList = () => {
+    setLoading(true);
     fetch(`${process.env.REACT_APP_HOST_IP}/transactions/?page=${currentPage}&district=${district}&ward=${ward}`, {
       method: 'GET',
       headers: {
@@ -64,6 +65,7 @@ export default function TransactionPoint() {
         if (res.status === 201) {
           alert('Tạo địa điểm thành công');
           handleGetList();
+          setShowCreate(false);
         } else {
           alert(res.json()?.error);
         }

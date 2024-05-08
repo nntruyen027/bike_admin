@@ -20,6 +20,7 @@ export default function DeviceType() {
   }, [currentPage, priceFrom, priceTo,]);
 
   const fetchDeviceList = () => {
+    setLoading(true);
     fetch(process.env.REACT_APP_HOST_IP + `/bicycles/types/?page=${currentPage}&price_from=${priceFrom}&price_to=${priceTo}`, {
       method: 'GET',
       headers: {

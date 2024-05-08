@@ -45,7 +45,10 @@ export default function Event() {
     const form = new FormData();
     form.append('name', name);
     form.append('address', address);
-    form.append('poster', image);
+    if(image != null && image != [] && image != '') {
+      console.log(1, image);
+      form.append('poster', image);
+    }
     form.append('begin_at', beginAt);
     form.append('end_at', endAt);
     form.append('text', text);
@@ -101,7 +104,10 @@ function EventItem({ event, getList, }) {
     const form = new FormData();
     form.append('name', name);
     form.append('address', address);
-    form.append('poster', image);
+    if(image != null && image != [] && image != '') {
+      console.log(1, image);
+      form.append('poster', image);
+    }
     form.append('begin_at', beginAt);
     form.append('end_at', endAt);
     form.append('text', text);

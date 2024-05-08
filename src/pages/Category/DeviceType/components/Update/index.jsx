@@ -3,15 +3,15 @@ import './Update.css';
 import PropTypes from 'prop-types';
 import { SaveButton, } from '~/components';
 
-function Update({ onUpdate, type, }) {
-  const defaultImage = process.env.PUBLIC_URL + 'assets/images/category/image-input.png';
+function Update({ onUpdate, type, setShow, }) {
+  const defaultImage = process.env.REACT_APP_HOST_IMAGE_IP + type.image;
   const [image, setImage,] = useState( );
   const [name, setName,] = useState(type?.name || '');
   const [price, setPrice,] = useState(type?.price || '');
   const [description, setDescription,] = useState(type?.description || '');
 
   useEffect(() => {
-    setImage( null);
+    setImage(null);
     setName(type.name || '');
     setPrice(type.price || '');
     setDescription(type.description || '');
@@ -35,6 +35,7 @@ function Update({ onUpdate, type, }) {
     }
 
     onUpdate(type.id, name, price, description, type.image, image);
+    setShow(false);
   };
   console.log(image);
 
@@ -70,6 +71,7 @@ function Update({ onUpdate, type, }) {
 Update.propTypes = {
   onUpdate: PropTypes.func,
   type: PropTypes.object,
+  setShow: PropTypes.func,
 };
 
 export default Update;
